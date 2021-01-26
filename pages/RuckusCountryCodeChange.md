@@ -26,7 +26,7 @@ ruckus(script)# exec ../../../bin/sh
 Ruckus Wireless ZoneDirector -- Command Line Interface
 Enter 'help' for a list of built-in commands.
 
-ruckus$ ruckus-cli2
+ruckus$ ruckus_cli2
 Welcome to Ruckus Unleashed Network Command Line Interface
 
 ruckus> exit
