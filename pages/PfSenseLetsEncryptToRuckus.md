@@ -21,20 +21,23 @@ ZD_CERTIFICATE=$1
 ZD_FQDN=$2
 
 ZD_COOKIE="/tmp/zonedirectorlogincookie.txt"
-LOGIN_ARGS="-k -c $ZD_COOKIE"
-CONF_ARGS="-k -b $ZD_COOKIE"
-ZD_BASE_URL="https://$ZD_FQDN/admin"
-ZD_LOGIN="$LOGIN_ARGS $ZD_BASE_URL/login.jsp"
-ZD_UPLOAD="$CONF_ARGS $ZD_BASE_URL/_upload.jsp"
-ZD_CMD="$CONF_ARGS $ZD_BASE_URL/_cmdstat.jsp"
-
-REPLACE_CERT_AJAX="<ajax-request action=\"docmd\" comp=\"system\" updater=\"rid.0.36674838786340014\" xcmd=\"replace-cert\" checkAbility=\"6\" timeout=\"-1\"><xcmd cmd=\"replace-cert\" cn=\"$ZD_FQDN\"/></ajax-request>"
-CERT_REBOOT_AJAX="<ajax-request action=\"docmd\" comp=\"worker\" updater=\"rid.0.4001861168896834\" xcmd=\"cert-reboot\" checkAbility=\"6\"><xcmd cmd=\"cert-reboot\" action=\"undefined\"/></ajax-request>"
 
 cd /conf/acme
-ZD_XSS="$(curl $ZD_LOGIN -d username=$ZD_USERNAME -d password=$ZD_PASSWORD -d ok=Log\ In -i | awk '/^HTTP_X_CSRF_TOKEN:/ { print $2 }' | tr -d '\040\011\012\015')"
-curl $ZD_UPLOAD -F u=@$ZD_CERTIFICATE.crt -F action=uploadcert -F callback=uploader_uploadcert
-curl $ZD_UPLOAD -F u=@$ZD_CERTIFICATE.key -F action=uploadprivatekey -F callback=uploader_uploadprivatekey
+
+ZD_LOGIN_URL="$(curl https://$ZD_FQDN -k -s -L -I -o /dev/null -w '%{url_effective}')"
+LOGIN_ARGS="-k -c $ZD_COOKIE"
+ZD_XSS="$(curl $LOGIN_ARGS $ZD_LOGIN_URL -d username=$ZD_USERNAME -d password=$ZD_PASSWORD -d ok=Log\ In -i | awk '/^HTTP_X_CSRF_TOKEN:/ { print $2 }' | tr -d '\040\011\012\015')"
+
+ZD_BASE_URL="$(dirname $ZD_LOGIN_URL)"
+CONF_ARGS="-i -k -b $ZD_COOKIE -c $ZD_COOKIE"
+ZD_UPLOAD="$CONF_ARGS $ZD_BASE_URL/_upload.jsp?request_type=xhr"
+ZD_CMD="$CONF_ARGS $ZD_BASE_URL/_cmdstat.jsp"
+
+REPLACE_CERT_AJAX="<ajax-request action=\"docmd\" comp=\"system\" updater=\"rid.0.5\" xcmd=\"replace-cert\" checkAbility=\"6\" timeout=\"-1\"><xcmd cmd=\"replace-cert\" cn=\"$ZD_FQDN\"/></ajax-request>"
+CERT_REBOOT_AJAX="<ajax-request action=\"docmd\" comp=\"worker\" updater=\"rid.0.5\" xcmd=\"cert-reboot\" checkAbility=\"6\"><xcmd cmd=\"cert-reboot\" action=\"undefined\"/></ajax-request>"
+
+curl $ZD_UPLOAD -H "X-CSRF-Token: $ZD_XSS" -F u=@$ZD_CERTIFICATE.crt -F action=uploadcert -F callback=uploader_uploadcert
+curl $ZD_UPLOAD -H "X-CSRF-Token: $ZD_XSS" -F u=@$ZD_CERTIFICATE.key -F action=uploadprivatekey -F callback=uploader_uploadprivatekey
 curl $ZD_CMD -H "X-CSRF-Token: $ZD_XSS" --data-raw "$REPLACE_CERT_AJAX"
 curl $ZD_CMD -H "X-CSRF-Token: $ZD_XSS" --data-raw "$CERT_REBOOT_AJAX"
 ```
@@ -42,6 +45,7 @@ curl $ZD_CMD -H "X-CSRF-Token: $ZD_XSS" --data-raw "$CERT_REBOOT_AJAX"
 ### Ask the Acme Service to run the script after renewing your certificate
 
 * In `Services` / `Acme Certificates` / `General settings`, make sure the `Write Certificates` box is ticked.
+* In `Services` / `Acme Certificates` / `Certificates`, check that the `Private Key` is RSA (ECDSA is unsupported on Unleashed and ZoneDirector).
 * In `Services` / `Acme Certificates` / `Certificates`, edit the certificate you want to use on your Ruckus ZoneDirector/Unleashed. Add a `Shell Command` to the `Actions List`: `/usr/local/bin/export_zd_cert.sh name.of.this.certificate zdhost.your.domain.name` .
 > `zdhost.your.domain.name` is whatever fully qualified hostname you're using for your ZoneDirector/Unleashed, and `name.of.this.certificate` is what you entered in the `Name` box for this certificate.
 
