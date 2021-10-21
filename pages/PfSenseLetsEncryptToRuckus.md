@@ -46,8 +46,8 @@ curl $ZD_CMD -H "X-CSRF-Token: $ZD_XSS" --data-raw "$CERT_REBOOT_AJAX"
 
 * In `Services` / `Acme Certificates` / `General settings`, make sure the `Write Certificates` box is ticked.
 * In `Services` / `Acme Certificates` / `Certificates`, edit the certificate you want to use on your Ruckus ZoneDirector/Unleashed. Add a `Shell Command` to the `Actions List`: `/usr/local/bin/export_zd_cert.sh name.of.this.certificate zdhost.your.domain.name` .
-* Check that the `Private Key` setting for your certificate is RSA (ECDSA is unsupported on Unleashed and ZoneDirector).
 > `zdhost.your.domain.name` is whatever fully qualified hostname you're using for your ZoneDirector/Unleashed, and `name.of.this.certificate` is what you entered in the `Name` box for this certificate.
+* Check that the `Private Key` setting for your certificate is RSA (ECDSA is unsupported on Unleashed and ZoneDirector).
 
 ### (Optionally) Add a DNS Host Override
 
