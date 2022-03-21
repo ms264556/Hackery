@@ -3,6 +3,7 @@
 Ruckus access points are cheap to buy from the USA.
 
 But Ruckus locks the country code on `US` model access points (unlike `WW` models), so you can't use the correct WiFi bands for other countries.
+And `US` model access points will refuse to join any existing Unleashed or ZoneDirector network which doesn't have its country code set to US.
 The country cannot be changed from the Web interface, and if you try to SSH in and `set countrycode XX` from the CLI then you receive an error: `illegal to change country code`.
 
 Fortunately, it's possible to bypass the country lock, or even turn a locked `US` AP into an unlocked `WW` AP...
