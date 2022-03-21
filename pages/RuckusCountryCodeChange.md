@@ -1,11 +1,36 @@
-# Remove Country Lock from any pre-2020 model Ruckus AP
+# Bypassing the Country Lock for US model Ruckus AP
 
 Ruckus access points are cheap to buy from the USA.
 
 But Ruckus locks the country code on `US` model access points (unlike `WW` models), so you can't use the correct WiFi bands for other countries.
 The country cannot be changed from the Web interface, and if you try to SSH in and `set countrycode XX` from the CLI then you receive an error: `illegal to change country code`.
 
-Fortunately, it's possible to turn a locked `US` AP into an unlocked `WW` AP...
+Fortunately, it's possible to bypass the country lock, or even turn a locked `US` AP into an unlocked `WW` AP...
+
+## Changing the locked Country Code
+
+SSH into the AP (using the same credentials you use to log into the web dashboard).
+
+If your AP is running Unleashed firmware, then you'll need to get it into AP mode:
+```console
+enable
+ap-mode
+```
+
+Manually update the country code (my example changes it to New Zealand):
+```console
+set rpmkey wlan-country-code NZ
+```
+
+The real `set countrycode NZ` would have set this rpmkey, but also fixed up the wifi channels. We're not running the fixup code, so it's safest to do a factory reset now:
+```console
+set factory
+reboot
+```
+
+Job done.
+
+## Removing the country lock (for pre-2020 AP models)
 
 ### 1) Obtain a root shell
 The unlocking procedure requires you to *temporarily* install an older software version.  
@@ -63,7 +88,7 @@ Enter 'help' for a list of built-in commands.
 ruckus$
 ```
 
-### 2) Now remove the Country Lock
+### 2) Remove the Country Lock
 
 ```console
 # bsp set fixed_ctry_code 0
@@ -90,28 +115,3 @@ Now reboot:
 ```
 
 You Access Point is now permanently unlocked. You can safely upgrade to any newer/older version of the software.
-
-# Alternatively, just change the locked Country Code
-If you can't install an older software version (or can't get the above to work) then there's the option of just changing the locked country:
-
-SSH into the AP (using the same credentials you use to log into the web dashboard).
-
-If your AP is running Unleashed firmware, then you'll need to get it into AP mode:
-```console
-enable
-ap-mode
-```
-
-Manually update the country code (my example changes it to New Zealand):
-```console
-set rpmkey wlan-country-code NZ
-```
-
-The real `set countrycode NZ` would have set this rpmkey, but also fixed up the wifi channels. We're not running the fixup code, so it's safest to do a factory reset now:
-```console
-set factory
-reboot
-```
-
-
-Job done.
