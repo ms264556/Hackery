@@ -1,6 +1,6 @@
 ## Font hackery
 
-[Tweak Verdana font for Programming (100% or 125% text scaling version)](pages/VerdanaVisualStudio.md)
+[A tweaked Verdana font for Programming (100% or 125% text scaling version)](pages/VerdanaVisualStudio.md)
 
 [A HiDPI-friendly Verdana font alternative for Programming (150%+ text scaling version)](pages/VerdanaRetinaVisualStudio.md)
 
