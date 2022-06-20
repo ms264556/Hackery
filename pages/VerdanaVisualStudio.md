@@ -1,14 +1,15 @@
-# Verdana tweaked for Visual Studio 2019
+# Verdana tweaked for Programming
 
 Verdana is the perfect programming font... but the latest Visual Studio releases do some per-symbol layout malarkey which ruins the angle bracket kerning. I guess nobody at Microsoft uses proportional fonts anymore.
 
-So I've created a tweaked font (in FontForge) which abuses the glyph hinting so that everything looks nice again in Visual Studio. I also added a => ligature, and widened the hyphen.
+So I've created a tweaked font (in FontForge) which abuses the glyph hinting so that everything looks nice again in Visual Studio.  
+I also added a => ligature, and widened the hyphen.
 
 <img src="../images/VSVerdana.png" width="800" />
 
 FontForge needs to run the script which generates the new font:
 ```Batchfile
-"C:\Program Files (x86)\FontForgeBuilds\bin\fontforge.exe" -script vsVerdana.py
+fontforge.exe -script vsVerdana.py
 ```
 
 Where `vsVerdana.py` is:
@@ -111,3 +112,5 @@ def main(argv):
 if __name__ == '__main__':
     main(sys.argv[1:])
 ```
+
+I accidentally saved the results to https://github.com/ms264556/Hackery/tree/master/images, if you want to save yourself some effort and just grab the fonts.
