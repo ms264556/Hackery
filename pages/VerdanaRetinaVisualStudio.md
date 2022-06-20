@@ -1,6 +1,6 @@
 # HiDPI Verdana for Visual Studio 2019
 
-Verdana is the perfect programming font... but it looks kinda chunky at 150% magnification (which is the default for a 27" 4K screen).
+Verdana is the perfect programming font... but it looks kinda chunky at 150% magnification or above (which is the default for a 27" 4K screen).
 
 Meiryo's latin characters are pretty much identical to Verdana, but with updated hinting which is much improved on HiDPI screens. Unfortunately (for programmers) Meiryo's `\` is replaced with `¥`, and Visual Studio ignores the substitution table entry which would fix this.
 
@@ -18,6 +18,7 @@ FontForge needs to run the script which generates the new font:
 Where `vsMeiryo.py` is:
 ```python
 import fontforge
+import sys
 
 def unmapGlyph(font, glyphname):
     glyph = font[glyphname]
