@@ -1,18 +1,20 @@
-# HiDPI Verdana for Visual Studio
+# HiDPI Verdana Font for Programming
 
 Verdana is the perfect programming font... but it looks kinda chunky at 150% magnification or above (which is the default for a 27" 4K screen).
 
 Meiryo's latin characters are pretty much identical to Verdana, but with updated hinting which is much improved on HiDPI screens. Unfortunately (for programmers) Meiryo's `\` is replaced with `¥`, and Visual Studio ignores the substitution table entry which would fix this.
 
-So I've created a tweaked font (in FontForge) which puts the correct backslash glyph back. I also added a => ligature, widened the hyphen, lowered the asterisk, and tweaked the kerning on angle brackets.
+So I've created a tweaked font (in FontForge) which puts the correct backslash glyph back.  
+I also added a => ligature, widened the hyphen, lowered the asterisk, and tweaked the kerning on angle brackets.
 
 <img src="../images/VSMeiryoUI.png" width="1189" />
 
-You probably don't have Meiryo, so from the Optional features Settings (try typing "Manage Optional Features" in the Start menu), add the Japanese Supplemental Fonts.
+You probably don't have Meiryo, so from the Optional features Settings (try typing "Manage Optional Features" in the Start menu), add the Japanese Supplemental Fonts.  
+I accidentally saved the results to https://github.com/ms264556/Hackery/tree/master/images, if you want to save yourself some effort and just grab the fonts.
 
 FontForge needs to run the script which generates the new font:
 ```Batchfile
-"C:\Program Files (x86)\FontForgeBuilds\bin\fontforge.exe" -script vsMeiryo.py
+fontforge.exe -script vsMeiryo.py
 ```
 
 Where `vsMeiryo.py` is:
