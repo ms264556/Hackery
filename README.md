@@ -1,12 +1,12 @@
 ## Font hackery
 
-[Create a tweaked Verdana font for Visual Studio](pages/VerdanaVisualStudio.md)
+[Tweak Verdana font for Programming (100% or 125% text scaling version)](pages/VerdanaVisualStudio.md)
 
-[A HiDPI-friendly Verdana alternative for Visual Studio (a tweaked Meiryo UI)](pages/VerdanaRetinaVisualStudio.md)
+[A HiDPI-friendly Verdana font alternative for Programming (150%+ text scaling version)](pages/VerdanaRetinaVisualStudio.md)
 
 ## Ruckus Wireless Hackery
 
-[Remove the country lock from Ruckus Access Points](pages/RuckusCountryCodeChange.md)
+[Change the Country Code on country-locked Ruckus Access Points](pages/RuckusCountryCodeChange.md)
 
 [Let pfSense push Let's Encrypt certificates to your Ruckus Unleashed or ZoneDirector](pages/PfSenseLetsEncryptToRuckus.md)
 
