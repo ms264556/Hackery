@@ -1,4 +1,4 @@
-# HiDPI Verdana for Visual Studio 2019
+# HiDPI Verdana for Visual Studio
 
 Verdana is the perfect programming font... but it looks kinda chunky at 150% magnification or above (which is the default for a 27" 4K screen).
 
