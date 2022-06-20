@@ -14,6 +14,7 @@ FontForge needs to run the script which generates the new font:
 Where `vsVerdana.py` is:
 ```python
 import fontforge
+import sys
 
 def unmapGlyph(font, glyphname):
     glyph = font[glyphname]
