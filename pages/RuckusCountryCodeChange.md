@@ -115,4 +115,4 @@ Now reboot:
 # reboot
 ```
 
-You Access Point is now permanently unlocked. You can safely upgrade to any newer/older version of the software.
+Your Access Point is now permanently unlocked. You can safely upgrade to any newer/older version of the software.
