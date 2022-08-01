@@ -13,73 +13,73 @@ using System;
 using System.IO;
 namespace Ms264556
 {
-	public static class Ruckus
-	{
-		private static readonly byte[] XorBytes = new byte[] { 0x29, 0x1A, 0x42, 0x05, 0xbd, 0x2c, 0xd6, 0xf2, 0x1c, 0xb7, 0xfa, 0xe5, 0x82, 0x78, 0x13, 0xca };
-	
-		public static void DecryptFile(string sourcePath, string destinationPath)
-		{
-			var inputBlock = new byte[8];
-			var previousInputBlock = new byte[8];
-			var outputBlock = new byte[8];
+    public static class Ruckus
+    {
+        private static readonly byte[] XorBytes = new byte[] { 0x29, 0x1A, 0x42, 0x05, 0xbd, 0x2c, 0xd6, 0xf2, 0x1c, 0xb7, 0xfa, 0xe5, 0x82, 0x78, 0x13, 0xca };
 
-			using(var input = File.OpenRead(sourcePath))
-			using(var output = File.Open(destinationPath, FileMode.Create))
-			{
-				int offset = 0;
-				while (true)
-				{
-					var bytesRead = input.Read(inputBlock, 0, 8);
+        public static void DecryptFile(string sourcePath, string destinationPath)
+        {
+            var inputBlock = new byte[8];
+            var previousInputBlock = new byte[8];
+            var outputBlock = new byte[8];
 
-					if (offset > 7)
-					{
-						var bytesToWrite = bytesRead == 0 ? (8 - outputBlock[7]) & 0xf : 8;
-						if (bytesToWrite > 0) { output.Write(outputBlock, 0, bytesToWrite); }
-					}
+            using (var input = File.OpenRead(sourcePath))
+            using (var output = File.Open(destinationPath, FileMode.Create))
+            {
+                int offset = 0;
+                while (true)
+                {
+                    var bytesRead = input.Read(inputBlock, 0, 8);
 
-					if (bytesRead == 0) break;
-					if (bytesRead != 8) throw new Exception("Corrupt input file");
+                    if (offset > 7)
+                    {
+                        var bytesToWrite = bytesRead == 0 ? (8 - outputBlock[7]) & 0xf : 8;
+                        if (bytesToWrite > 0) { output.Write(outputBlock, 0, bytesToWrite); }
+                    }
 
-					for (int i = 0; i < bytesRead; i++)
-					{
-						outputBlock[i] = (byte)(XorBytes[offset++ % 16] ^ inputBlock[i] ^ previousInputBlock[i]);
-						previousInputBlock[i] = inputBlock[i];
-					}
-				}
-			}
-		}
-	
-		public static void EncryptFile(string sourcePath, string destinationPath)
-		{
-			var inputBlock = new byte[8];
-			var previousInputBlock = new byte[8];
+                    if (bytesRead == 0) break;
+                    if (bytesRead != 8) throw new Exception("Corrupt input file");
 
-			using (var input = File.OpenRead(sourcePath))
-			using (var output = File.Open(destinationPath, FileMode.Create))
-			{
-				int offset = 0;
-				while (true)
-				{
-					var bytesRead = input.Read(inputBlock, 0, 8);
-					if (bytesRead < 8)
-					{
-						byte paddingBytes = (byte)(8 - bytesRead);
-						byte padding = (byte)(paddingBytes | paddingBytes << 4);
-						for (int i = 0; i < paddingBytes; i++) { inputBlock[i + bytesRead] = padding; }
-					}
+                    for (int i = 0; i < bytesRead; i++)
+                    {
+                        outputBlock[i] = (byte)(XorBytes[offset++ % 16] ^ inputBlock[i] ^ previousInputBlock[i]);
+                        previousInputBlock[i] = inputBlock[i];
+                    }
+                }
+            }
+        }
 
-					for (int i = 0; i < 8; i++)
-					{
-						inputBlock[i] = (byte)(XorBytes[offset++ % 16] ^ inputBlock[i] ^ previousInputBlock[i]);
-						previousInputBlock[i] = inputBlock[i];
-					}
-					output.Write(inputBlock, 0, 8);
+        public static void EncryptFile(string sourcePath, string destinationPath)
+        {
+            var inputBlock = new byte[8];
+            var previousInputBlock = new byte[8];
 
-					if (bytesRead < 8) break;
-				}
-			}
-		}
-	}
+            using (var input = File.OpenRead(sourcePath))
+            using (var output = File.Open(destinationPath, FileMode.Create))
+            {
+                int offset = 0;
+                while (true)
+                {
+                    var bytesRead = input.Read(inputBlock, 0, 8);
+                    if (bytesRead < 8)
+                    {
+                        byte paddingBytes = (byte)(8 - bytesRead);
+                        byte padding = (byte)(paddingBytes | paddingBytes << 4);
+                        for (int i = 0; i < paddingBytes; i++) { inputBlock[i + bytesRead] = padding; }
+                    }
+
+                    for (int i = 0; i < 8; i++)
+                    {
+                        inputBlock[i] = (byte)(XorBytes[offset++ % 16] ^ inputBlock[i] ^ previousInputBlock[i]);
+                        previousInputBlock[i] = inputBlock[i];
+                    }
+                    output.Write(inputBlock, 0, 8);
+
+                    if (bytesRead < 8) break;
+                }
+            }
+        }
+    }
 }
 "@;
 ```
