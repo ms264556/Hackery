@@ -92,7 +92,7 @@ namespace Ms264556
 ## Re-encrypt a backup
 
 ```powershell
-[Ms264556.Ruckus]::DecryptFile("C:\Users\Ms264556\Downloads\ruckus_db_073122_14_17.bak.tgz", "C:\Users\Ms264556\Downloads\ruckus_db_073122_14_17.modded.bak")
+[Ms264556.Ruckus]::EncryptFile("C:\Users\Ms264556\Downloads\ruckus_db_073122_14_17.bak.tgz", "C:\Users\Ms264556\Downloads\ruckus_db_073122_14_17.modded.bak")
 ```
 
 ## What about Backup > Decrypt > Edit > Re-encrypt > Restore
