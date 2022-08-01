@@ -10,6 +10,8 @@
 
 [Let pfSense push Let's Encrypt certificates to your Ruckus Unleashed or ZoneDirector](pages/PfSenseLetsEncryptToRuckus.md)
 
+[Decrypt and Re-encrypt Ruckus Backups](pages/Decrypt%20Ruckus%20Backups.md)
+
 ## Dell Monitor KVM Hackery
 
 [Sharing a Bluetooth Keyboard between Linux and Windows](pages/BluetoothKeyboardViaKVM.md)
