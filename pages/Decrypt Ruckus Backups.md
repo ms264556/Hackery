@@ -2,7 +2,7 @@
 
 I'm using this to decrypt, edit, re-encrypt ZoneDirector upgrade images (which is not working yet).
 
-But it also works for ZoneDirector backups (and I assume Unleashed backups too) which is useful.
+But it also works for ZoneDirector (and I assume Unleashed) backups and debug logs, which is useful.
 
 Unfortunately my language of choice is C#, so the decryption/encryption currently needs PowerShell (or you can copy the class into Visual Studio).
 
