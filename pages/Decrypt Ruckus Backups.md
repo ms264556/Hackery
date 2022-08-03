@@ -94,6 +94,7 @@ namespace Ms264556
 
 ## Ruckus Crypt bash Functions (using Python)
 > Python turned out to be really slow to work with bytes (80 seconds to process a ~170MB ZoneDirector image on my PC), so I changed the Python version to work with a struct of ints instead. If you're just processing backups then this is unimportant: they're tiny so they only take a second.
+
 ```bash
 function rks_encrypt {
 RUCKUS_SRC="$1" RUCKUS_DEST="$2" python3 - <<END
