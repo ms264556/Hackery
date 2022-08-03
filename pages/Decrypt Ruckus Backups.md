@@ -1,4 +1,4 @@
-# Decrypt Ruckus Unleashed/ZoneDirector Backups
+# Decrypt Ruckus Unleashed / ZoneDirector Backups
 
 I'm using this to decrypt, edit, re-encrypt ZoneDirector upgrade images (which is not working yet).
 
