@@ -10,7 +10,7 @@
 
 [Let pfSense push Let's Encrypt certificates to your Ruckus Unleashed or ZoneDirector](pages/PfSenseLetsEncryptToRuckus.md)
 
-[Decrypt and Re-encrypt Ruckus Backups](pages/Decrypt%20Ruckus%20Backups.md)
+[Decrypt and Re-encrypt Ruckus Backups](pages/DecryptRuckusBackups.md)
 
 ## Dell Monitor KVM Hackery
 
