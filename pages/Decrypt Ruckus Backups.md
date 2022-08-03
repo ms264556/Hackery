@@ -168,7 +168,7 @@ Plenty of scope for good stuff. e.g. tweaking the `metadata` file lets you...
 * Restore a backup from a previous firmware version.
 * Restore a backup from a 'bigger' model to a 'smaller' model (e.g. if you replaced an old ZD3000 with a ZD1200).
 
-```bash Modify a ZoneDirector 10.3 backup so it can be restored onto a ZoneDirector running 10.5.1
+```bash
 rks_decrypt zd1200_103.bak zd1200_1051.bak.tar.gz
 gunzip zd1200_1051.bak.tar.gz
 cat > metadata <<END
