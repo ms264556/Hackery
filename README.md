@@ -1,3 +1,5 @@
+# Hackery
+
 Just hacks and code snippets which might be useful to someone else.
 
 ## Font hackery
