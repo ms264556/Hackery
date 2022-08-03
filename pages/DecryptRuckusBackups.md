@@ -193,7 +193,7 @@ mkdir bakimg
 tar -xzvf ruckus.bak.tgz -C bakimg
 ```
 
-Now edit `bakimg/etc/airespider/dpsk-list.xml` to add/remove users, change VLANs & change password.  
+Now edit `bakimg/etc/airespider/dpsk-list.xml` to add/remove users, change VLANs & change passwords.  
 Then...
 
 ```bash
@@ -208,13 +208,13 @@ rks_encrypt ruckus.modded.bak.tgz ruckus.modded.bak
 #*_ljpdRdtm/]2*i`SPSK.:%Li/aZDKts5J?pUJX+lp[t]b!RQ+,=-dmx0TE`U
 ```
 
-you can run something like this:-
+>you can run something like this:-
 
 ```bash
 echo '#*_ljpdRdtm/]2*i`SPSK.:%Li/aZDKts5J?pUJX+lp[t]b!RQ+,=-dmx0TE`U' | tr ' -}' '!-~' | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g; s/"/\&quot;/g; s/'"'"'/\&#39;/g'
 ```
 
-to obtain the `x-passphrase`:-
+>to obtain the `x-passphrase`:-
 
 ```
 $+`mkqeSeun0^3+jaTQTL/;&amp;Mj0b[ELut6K@qVKY,mq\u^c&quot;SR,-&gt;.eny1UFaV
