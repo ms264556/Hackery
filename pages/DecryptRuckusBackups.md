@@ -163,8 +163,10 @@ rks_decrypt ruckus_db_073122_14_17.bak ruckus_db_073122_14_17.bak.tgz
 rks_encrypt ruckus_db_073122_14_17.bak.tgz ruckus_db_073122_14_17.modded.bak
 ```
 
-### Backup > Decrypt > Edit > Re-encrypt > Restore
+## Backup > Decrypt > Edit > Re-encrypt > Restore
 Plenty of scope for good stuff. e.g. tweaking the `metadata` file lets you...
+
+### Restore Onto Mismatched Firmware Version / Downlevel Hardware
 * Restore a backup from a previous firmware version.
 * Restore a backup from a 'bigger' model to a 'smaller' model (e.g. if you replaced an old ZD3000 with a ZD1200).
 
@@ -182,6 +184,42 @@ tar uvf zd1200_1051.bak.tar metadata
 gzip zd1200_1051.bak.tar
 rks_encrypt zd1200_1051.bak.tar.gz zd1200_1051.bak
 ```
+
+### Choose Passwords for Internal DPSK Users
+
+```bash
+rks_decrypt ruckus.bak ruckus.bak.tgz
+mkdir bakimg
+tar -xzvf ruckus.bak.tgz -C bakimg
+```
+
+Now edit `bakimg/etc/airespider/dpsk-list.xml` to add/remove users, change VLANs & change password.  
+Then...
+
+```bash
+find bakimg -printf "%P\n" | tar -czf ruckus.modded.bak.tgz --no-recursion -C bakimg -T -
+rks_encrypt ruckus.modded.bak.tgz ruckus.modded.bak
+```
+
+>The only tricky part is the `x-passphrase` attribute for each `<dpsk>`.  
+>This needs to be ROT1 encoded, and then HTML encoded. E.g. for the passphrase:-
+
+```
+#*_ljpdRdtm/]2*i`SPSK.:%Li/aZDKts5J?pUJX+lp[t]b!RQ+,=-dmx0TE`U
+```
+
+you can run something like this:-
+
+```bash
+echo '#*_ljpdRdtm/]2*i`SPSK.:%Li/aZDKts5J?pUJX+lp[t]b!RQ+,=-dmx0TE`U' | tr ' -}' '!-~' | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g; s/"/\&quot;/g; s/'"'"'/\&#39;/g'
+```
+
+to obtain the `x-passphrase`:-
+
+```
+$+`mkqeSeun0^3+jaTQTL/;&amp;Mj0b[ELut6K@qVKY,mq\u^c&quot;SR,-&gt;.eny1UFaV
+```
+
 
 ## What about installing patched ZoneDirector system images
 
