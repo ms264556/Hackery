@@ -4,9 +4,9 @@ I'm using this to decrypt, edit, re-encrypt ZoneDirector upgrade images (which i
 
 But it also works for ZoneDirector & Unleashed backups and debug logs, which is useful.
 
-Unfortunately my language of choice is C#, so the decryption/encryption currently needs PowerShell (or you can copy the class into Visual Studio).
+There's a C# and Python version. The C# version is much more efficient, so use that if you have a choice (or want to convert the algorithm to a different language).
 
-## Ruckus Crypt PowerShell Class
+## Ruckus Crypt PowerShell Functions (using C#)
 ```powershell
 Add-Type -Language CSharp @"
 using System;
@@ -83,16 +83,83 @@ namespace Ms264556
 }
 "@;
 ```
-
-## Decrypt a backup
+### Decrypt a backup
 ```powershell
 [Ms264556.Ruckus]::DecryptFile("C:\Users\Ms264556\Downloads\ruckus_db_073122_14_17.bak", "C:\Users\Ms264556\Downloads\ruckus_db_073122_14_17.bak.tgz")
 ```
-
-## Re-encrypt a backup
-
+### Re-encrypt a backup
 ```powershell
 [Ms264556.Ruckus]::EncryptFile("C:\Users\Ms264556\Downloads\ruckus_db_073122_14_17.bak.tgz", "C:\Users\Ms264556\Downloads\ruckus_db_073122_14_17.modded.bak")
+```
+
+## Ruckus Crypt bash Functions (using Python)
+> Python turned out to be really slow to work with bytes (80 seconds to process a ~170MB ZoneDirector image on my PC), so I changed the Python version to work with a struct of ints instead. If you're just processing backups then this is unimportant: they're tiny so they only take a second.
+```bash
+function rks_crypt {
+RUCKUS_SRC="$1" RUCKUS_DEST="$2" python3 - <<END
+import os
+import struct
+
+input_path = os.environ['RUCKUS_SRC']
+output_path = os.environ['RUCKUS_DEST']
+
+(xor_int, xor_flip) = struct.unpack('QQ', b')\x1aB\x05\xbd,\xd6\xf25\xad\xb8\xe0?T\xc58')
+structInt8 = struct.Struct('Q')
+
+with open(input_path, "rb") as input_file:
+    with open(output_path, "wb") as output_file:
+        input_len = os.path.getsize(input_path)
+        input_blocks = input_len // 8
+        output_int = 0
+        input_data = input_file.read(input_blocks * 8)
+        for input_int in struct.unpack_from(str(input_blocks) + "Q", input_data):
+            output_int ^= xor_int ^ input_int
+            xor_int ^= xor_flip
+            output_file.write(structInt8.pack(output_int))
+        
+        input_block = input_file.read()
+        input_padding = 8 - len(input_block)
+        input_int = structInt8.unpack(input_block.ljust(8, bytes([input_padding | input_padding << 4])))[0]
+        output_int ^= xor_int ^ input_int
+        output_file.write(structInt8.pack(output_int))
+END
+}
+```
+```bash
+function rks_decrypt {
+RUCKUS_SRC="$1" RUCKUS_DEST="$2" python3 - <<END
+import os
+import struct
+
+input_path = os.environ['RUCKUS_SRC']
+output_path = os.environ['RUCKUS_DEST']
+
+(xor_int, xor_flip) = struct.unpack('QQ', b')\x1aB\x05\xbd,\xd6\xf25\xad\xb8\xe0?T\xc58')
+structInt8 = struct.Struct('Q')
+
+with open(input_path, "rb") as input_file:
+    with open(output_path, "wb") as output_file:
+        input_data = input_file.read()
+        previous_input_int = 0
+        for input_int in struct.unpack_from(str(len(input_data) // 8) + "Q", input_data):
+            output_bytes = structInt8.pack(previous_input_int ^ xor_int ^ input_int)
+            xor_int ^= xor_flip
+            previous_input_int = input_int
+            output_file.write(output_bytes)
+        
+        output_padding = int.from_bytes(output_bytes[-1:], 'big') & 0xf
+        output_file.seek(-output_padding, os.SEEK_END)
+        output_file.truncate()
+END
+}
+```
+### Decrypt a backup
+```bash
+rks_decrypt ruckus_db_073122_14_17.bak ruckus_db_073122_14_17.bak.tgz
+```
+### Re-encrypt a backup
+```bash
+rks_encrypt ruckus_db_073122_14_17.bak.tgz ruckus_db_073122_14_17.modded.bak
 ```
 
 ## What about Backup > Decrypt > Edit > Re-encrypt > Restore
