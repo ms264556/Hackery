@@ -1,3 +1,5 @@
+Just hacks and code snippets which might be useful to someone else.
+
 ## Font hackery
 
 [A tweaked Verdana font for Programming (100% or 125% text scaling version)](pages/VerdanaVisualStudio.md)
