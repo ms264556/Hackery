@@ -16,7 +16,7 @@ Just hacks and code snippets which might be useful to someone else.
 
 [Decrypt and Re-encrypt Ruckus Backups](pages/DecryptRuckusBackups.md)
 
-* [Restore a Disallowed Backup (mimatched version or hardware)](pages/DecryptRuckusBackups.md#restore-onto-mismatched-firmware-version--downlevel-hardware)
+* [Restore a Disallowed Backup (mismatched version or hardware)](pages/DecryptRuckusBackups.md#restore-onto-mismatched-firmware-version--downlevel-hardware)
 
 * [Choose Passwords for DPSK Users](pages/DecryptRuckusBackups.md#choose-passwords-for-internal-dpsk-users)
 
