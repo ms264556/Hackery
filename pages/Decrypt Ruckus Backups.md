@@ -162,7 +162,7 @@ rks_decrypt ruckus_db_073122_14_17.bak ruckus_db_073122_14_17.bak.tgz
 rks_encrypt ruckus_db_073122_14_17.bak.tgz ruckus_db_073122_14_17.modded.bak
 ```
 
-## What about Backup > Decrypt > Edit > Re-encrypt > Restore
+### Backup > Decrypt > Edit > Re-encrypt > Restore
 Plenty of scope for good stuff. e.g. tweaking the `metadata` file lets you...
 * Restore a backup from a previous firmware version.
 * Restore a backup from a 'bigger' model to a 'smaller' model (e.g. if you replaced an old ZD3000 with a ZD1200).
