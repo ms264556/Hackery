@@ -1,8 +1,6 @@
 # Decrypt Ruckus Unleashed / ZoneDirector Backups
 
-I'm using this to decrypt, edit, re-encrypt ZoneDirector upgrade images (which is not working yet).
-
-But it also works for ZoneDirector & Unleashed backups and debug logs, which is useful.
+This code works for ZoneDirector & Unleashed backups and debug logs, and also ZoneDirector Software Images.
 
 There's a C# and Python version. The C# version is much more efficient, so use that if you have a choice (or want to convert the algorithm to a different language).
 
@@ -218,94 +216,4 @@ echo '#*_ljpdRdtm/]2*i`SPSK.:%Li/aZDKts5J?pUJX+lp[t]b!RQ+,=-dmx0TE`U' | tr ' -}'
 
 ```
 $+`mkqeSeun0^3+jaTQTL/;&amp;Mj0b[ELut6K@qVKY,mq\u^c&quot;SR,-&gt;.eny1UFaV
-```
-
-
-## Give Yourself 5 Years of ZoneDirector Support (Upgrade) Entitlement
-
-We can patch out the code which signature-checks support entitlement files.
-
->The Ruckus Support Activation Server (at https://supportactivation.ruckuswireless.com/) is currently handing out 30 day entitlements when asked, so that ZoneDirectors have an endless rolling 30 day entitlement.
->It's useful to see how content can be injected into the software image, or if Ruckus start enforcing Support licenses again in the future.
-
-### Extract the upgrade image
-```bash
-rks_decrypt zd1200_10.5.1.0.176.ap_10.5.1.0.176.img zd1200_10.5.1.0.176.ap_10.5.1.0.176.img.tgz
-gzip -d zd1200_10.5.1.0.176.ap_10.5.1.0.176.img.tgz
-tar -xvf zd1200_10.5.1.0.176.ap_10.5.1.0.176.img.tar ac_upg.sh metadata
-```
-
-### Edit the upgrade image
->The upgrade process just runs software image's `ac_upg.sh`, and images are not signed! So it's very easy to customize your ZoneDirector.
-
-If you edit the `ac_upg.sh` file, then you can poke your injection script immediately following these lines within the `_upg_rootfs()` function:-
-
-Before:-
-```bash
-cd /mnt; 
-echo "FILE:`/usr/bin/md5sum ./$ZD_KERNEL`" >>/mnt/file_list.txt
-```
-
-After
-```bash
-cd /mnt; 
-echo "FILE:`/usr/bin/md5sum ./$ZD_KERNEL`" >>/mnt/file_list.txt
-CUR_WRAP_MD5=`md5sum /mnt/bin/sys_wrapper.sh | cut -d' ' -f1`
-sed -i -e '/uudecode.*signature\.ud.*signature\.tmp/d' -e 's/openssl dgst .*verify .*signature\.ud .*support\.tmp/true/' /mnt/bin/sys_wrapper.sh
-NEW_WRAP_MD5=`md5sum /mnt/bin/sys_wrapper.sh | cut -d' ' -f1`
-sed -i -e "s/$CUR_WRAP_MD5/$NEW_WRAP_MD5/" /mnt/file_list.txt
-```
-
-If you're on the same firmware version as the upgrade, you can also edit the metadata file, and increase the BUILD number to 999, so this is treated as a version upgrade.
-
-### Repackage the image
-
-```bash
-tar uvf zd1200_10.5.1.0.176.ap_10.5.1.0.176.img.tar ac_upg.sh metadata
-gzip zd1200_10.5.1.0.176.ap_10.5.1.0.176.img.tar
-rks_encrypt zd1200_10.5.1.0.176.ap_10.5.1.0.176.img.tar.gz zd1200_10.5.1.0.176.ap_10.5.1.0.176.patched.img
-```
-
-Now you can use the image to do an upgrade directly from the Web UI.
-
-### Create a support file, and upload it
-
-The support file looks like this (but with your ZoneZirector's serial number instead of 000000000):-
-
-```xml
-<support-list>
-	<support zd-serial-number="000000000" service-purchased="904" date-start="1659369540" date-end="1817135940" ap-support-number="licensed" DELETABLE="false"></support>
-<signature></signature>
-</support-list>
-```
-
-You'll need to save this file as `support` (no extension), and then poke it into a `.tgz` file:-
-
-```bash
-tar -czf support.tgz support
-```
-
-Then upload it!
-
-## Directly editing the ext2 root image
-
-This doesn't work so far. I tried the below, but the ZoneDirector just rebooted into the un-upgraded software.  
-If you have time and manage to get this working then let me know.
-
-```bash
-mkdir zdimage
-tar -xzvf zd1200_10.5.1.0.176.ap_10.5.1.0.176.decrypted.tgz -C zdimage
-mv zdimage/rootfs.i386.ext2.director1200.img rootfs.i386.ext2.director1200.img.gz
-gzip -d rootfs.i386.ext2.director1200.img.gz
-mkdir zdroot
-sudo mount -o loop,rw,noatime -t ext2 rootfs.i386.ext2.director1200.img zdroot
-pushd zdroot/etc/persistent-scripts/
-sudo ln -s ../../bin/busybox sh
-popd
-sudo umount zdroot
-gzip rootfs.i386.ext2.director1200.img
-mv rootfs.i386.ext2.director1200.img.gz zdimage/rootfs.i386.ext2.director1200.img
-md5sum zdimage/rootfs.i386.ext2.director1200.img # copy the md5
-nano zdimage/metadata # paste the new md5 over the old ROOTFS_MD5SUM
-find zdimage -printf "%P\n" | tar -czf zd1200_10.5.1.0.176.ap_10.5.1.0.176.modified.tgz --no-recursion -C zdimage -T -
 ```
