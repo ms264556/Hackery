@@ -14,11 +14,13 @@ Just hacks and code snippets which might be useful to someone else.
 
 [Let pfSense push Let's Encrypt certificates to your Ruckus Unleashed or ZoneDirector](pages/PfSenseLetsEncryptToRuckus.md)
 
-[Decrypt and Re-encrypt Ruckus Backups](pages/DecryptRuckusBackups.md)
+[Decrypt, Edit, Re-encrypt Ruckus Backups](pages/DecryptRuckusBackups.md)
 
 * [Restore a Disallowed Backup (mismatched version or hardware)](pages/DecryptRuckusBackups.md#restore-onto-mismatched-firmware-version--downlevel-hardware)
 
 * [Choose Passwords for DPSK Users](pages/DecryptRuckusBackups.md#choose-passwords-for-internal-dpsk-users)
+
+[Decrypt, Edit, Re-encrypt ZoneDirector Software Images](pages/CustomizeZoneDirectorSoftware.md)
 
 ## Dell Monitor KVM Hackery
 
