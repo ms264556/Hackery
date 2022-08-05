@@ -79,8 +79,8 @@ rks_encrypt zd1200_10.5.1.0.176.ap_10.5.1.0.176.img.tgz zd1200_10.5.1.0.176.ap_1
 
 We can patch out the code which signature-checks support entitlement files, then upload a 5 year (or longer) entitlement.
 
->The Ruckus Support Activation Server (at https://supportactivation.ruckuswireless.com/) is currently handing out 30 day entitlements when asked, so that ZoneDirectors have an endless rolling 30 day entitlement.
->It's useful to see how content can be injected into the software image, or if Ruckus start enforcing Support licenses again in the future.
+>The Ruckus Support Activation Server (at https://supportactivation.ruckuswireless.com/) is currently handing out 30 day entitlements when asked, so that ZoneDirectors have an endless rolling 30 day entitlement.  
+>The code below is still useful to see how content can be injected into the software image, or if Ruckus start enforcing Support licenses again in the future.
 
 ### Extract the upgrade image
 ```bash
