@@ -5,7 +5,7 @@ The ZoneDirector upgrade process just runs a script (`ac_upg.sh`) from the Softw
 You'll need the to decrypt/encrypt the images. I include bash functions to do this here. If you prefer C# then look in the Decryption/Encryption page.
 
 ## Ruckus Crypt bash Functions (using Python)
-> Python turned out to be really slow to work with bytes (80 seconds to process a ~170MB ZoneDirector image on my PC), so I changed the Python version to work with a struct of ints instead. If you're just processing backups then this is unimportant: they're tiny so they only take a second.
+> Use the C# version on the Decrypt/Encrypt page if you want something much faster.
 
 ```bash
 function rks_encrypt {
@@ -66,13 +66,13 @@ with open(input_path, "rb") as input_file:
 END
 }
 ```
-### Decrypt a backup
+### Decrypt a software image
 ```bash
-rks_decrypt ruckus_db_073122_14_17.bak ruckus_db_073122_14_17.bak.tgz
+rks_decrypt zd1200_10.5.1.0.176.ap_10.5.1.0.176.img zd1200_10.5.1.0.176.ap_10.5.1.0.176.img.tgz
 ```
-### Re-encrypt a backup
+### Re-encrypt a software image
 ```bash
-rks_encrypt ruckus_db_073122_14_17.bak.tgz ruckus_db_073122_14_17.modded.bak
+rks_encrypt zd1200_10.5.1.0.176.ap_10.5.1.0.176.img.tgz zd1200_10.5.1.0.176.ap_10.5.1.0.176.modded.img
 ```
 
 ## Give Yourself 5 Years of ZoneDirector Support (Upgrade) Entitlement
