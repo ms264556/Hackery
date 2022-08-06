@@ -128,7 +128,8 @@ The support file looks like this (but with your ZoneZirector's serial number ins
 ```xml
 <support-list>
 	<support zd-serial-number="000000000" service-purchased="904" date-start="1659369540" date-end="1817135940" ap-support-number="licensed" DELETABLE="false"></support>
-<signature></signature>
+<signature>
+</signature>
 </support-list>
 ```
 
