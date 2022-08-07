@@ -1,6 +1,6 @@
 # Add AP Licenses and Upgrade Entitlement to a ZoneDirector 1200
 
->If you have an older ZoneDirector then you can still add AP Licenses, but you'll have to (temporarily) install older software.  
+>If you have a ZoneDirector 1000/1100/3000/5000 then you can still add AP Licenses, but you'll have to (temporarily) install older software.  
 >Follow the instructions here: [Add AP Licenses to a ZoneDirector](ZDAddLicenses.md)
 
 The ZoneDirector upgrade process just runs a script (`ac_upg.sh`) from the Software Image, and nothing is signed!  
