@@ -75,12 +75,7 @@ rks_decrypt zd1200_10.5.1.0.176.ap_10.5.1.0.176.img zd1200_10.5.1.0.176.ap_10.5.
 rks_encrypt zd1200_10.5.1.0.176.ap_10.5.1.0.176.img.tgz zd1200_10.5.1.0.176.ap_10.5.1.0.176.modded.img
 ```
 
-## Give Yourself 5 Years of ZoneDirector Support (Upgrade) Entitlement
-
-We can patch out the code which signature-checks support entitlement files, then upload a 5 year (or longer) entitlement.
-
->The Ruckus Support Activation Server (at https://supportactivation.ruckuswireless.com/) is currently handing out 30 day entitlements when asked, so that ZoneDirectors have an endless rolling 30 day entitlement.  
->The code below is still useful to see how content can be injected into the software image, or if Ruckus start enforcing Support licenses again in the future.
+## Editing a Software Image
 
 ### Extract the upgrade image
 ```bash
@@ -89,7 +84,7 @@ gzip -d zd1200_10.5.1.0.176.ap_10.5.1.0.176.img.tgz
 tar -xvf zd1200_10.5.1.0.176.ap_10.5.1.0.176.img.tar ac_upg.sh metadata
 ```
 
-### Edit the upgrade image
+### Injecting content during the upgrade process 
 
 Edit the `ac_upg.sh` file, adding code to inject your changes. You can insert your injection script immediately following these lines within the `_upg_rootfs()` function:-
 
@@ -109,8 +104,6 @@ NEW_WRAP_MD5=`md5sum /mnt/bin/sys_wrapper.sh | cut -d' ' -f1`
 sed -i -e "s/$CUR_WRAP_MD5/$NEW_WRAP_MD5/" /mnt/file_list.txt
 ```
 
-If you're on the same firmware version as the upgrade, you can also edit the metadata file, and increase the BUILD number to 999, so this is treated as a version upgrade.
-
 ### Repackage the image
 
 ```bash
@@ -120,26 +113,6 @@ rks_encrypt zd1200_10.5.1.0.176.ap_10.5.1.0.176.img.tar.gz zd1200_10.5.1.0.176.a
 ```
 
 Now you can use the image to do an upgrade directly from the Web UI.
-
-### Create a support file, and upload it
-
-The support file looks like this (but with your ZoneZirector's serial number instead of 000000000):-
-
-```xml
-<support-list>
-	<support zd-serial-number="000000000" service-purchased="904" date-start="1659369540" date-end="1817135940" ap-support-number="licensed" DELETABLE="false"></support>
-<signature>
-</signature>
-</support-list>
-```
-
-You'll need to save this file as `support` (no extension), and then poke it into a `.tgz` file:-
-
-```bash
-tar -czf support.tgz support
-```
-
-Then upload it!
 
 ## Directly editing the ext2 root image
 
