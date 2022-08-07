@@ -1,7 +1,7 @@
 # Add AP Licenses to a ZoneDirector
 
-If you have a ZoneDirector 1200 then you can add AP Licenses without having to install older software.  
-Follow the instructions here: [Add AP Licenses and Upgrade Entitlement to a ZoneDirector 1200](ZD1200LicensesAndSupport.md)
+>If you have a ZoneDirector 1200 then you can add AP Licenses without having to install older software.  
+>Follow the instructions here: [Add AP Licenses and Upgrade Entitlement to a ZoneDirector 1200](ZD1200LicensesAndSupport.md)
 
 ## 1) Install vulnerable firmware
 The unlocking procedure requires you to *temporarily* install an older software version.  
