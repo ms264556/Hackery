@@ -90,18 +90,19 @@ Edit the `ac_upg.sh` file, adding code to inject your changes. You can insert yo
 
 Before:-
 ```bash
-cd /mnt; 
 echo "FILE:`/usr/bin/md5sum ./$ZD_KERNEL`" >>/mnt/file_list.txt
+cd $popd;
 ```
 
 After
 ```bash
-cd /mnt; 
 echo "FILE:`/usr/bin/md5sum ./$ZD_KERNEL`" >>/mnt/file_list.txt
-CUR_WRAP_MD5=`md5sum /mnt/bin/sys_wrapper.sh | cut -d' ' -f1`
-sed -i -e '/uudecode.*signature\.ud.*signature\.tmp/d' -e 's/openssl dgst .*verify .*signature\.ud .*support\.tmp/true/' /mnt/bin/sys_wrapper.sh
-NEW_WRAP_MD5=`md5sum /mnt/bin/sys_wrapper.sh | cut -d' ' -f1`
-sed -i -e "s/$CUR_WRAP_MD5/$NEW_WRAP_MD5/" /mnt/file_list.txt
+#
+# Your code goes here.
+# The upgraded root fs is now RW mounted at /mnt for you to edit.
+# If you have extra files you want to install then add them to the tar file and extract them here.
+#
+cd $popd;
 ```
 
 ### Repackage the image
