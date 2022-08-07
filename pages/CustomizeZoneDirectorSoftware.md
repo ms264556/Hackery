@@ -86,7 +86,8 @@ tar -xvf zd1200_10.5.1.0.176.ap_10.5.1.0.176.img.tar ac_upg.sh metadata
 
 ### Injecting content during the upgrade process 
 
-Edit the `ac_upg.sh` file, adding code to inject your changes. You can insert your injection script immediately following these lines within the `_upg_rootfs()` function:-
+Edit the `ac_upg.sh` file, adding code to inject your changes.  
+You can insert your injection script immediately into the `_upg_rootfs()` function:-
 
 Before:-
 ```bash
