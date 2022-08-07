@@ -18,7 +18,6 @@ I've tested the script on all currently-public ZD1200 releases (9.9 - 10.5) for 
 >Contact me in Issues if you need me to provide you with an image to flash.
 
 ## Patch from Linux or WSL
-> The Windows version is not 100% reliable, so I won't post it yet.
 
 ```bash
 #!/bin/bash
