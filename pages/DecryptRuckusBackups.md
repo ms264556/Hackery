@@ -6,7 +6,7 @@ There is a Windows Powershell/C# version at the bottom of this page.
 
 ## Ruckus Crypt bash Functions (using Python)
 
-> Python turned out to be really slow to work with bytes (80 seconds to process a ~170MB ZoneDirector image on my PC), so this is more ugly and complicated than the C# version below.
+> Python is really slow. To keep things speedy(ish), this code is more ugly and complicated than the C# version below, and uses lots of memory.
 
 ```bash
 function rks_encrypt {
