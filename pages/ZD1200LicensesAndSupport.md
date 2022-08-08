@@ -12,7 +12,8 @@ To prevent e-waste and save these from landfills, I provide a procedure to enabl
 The ZoneDirector upgrade process just runs a script (`ac_upg.sh`) from the Software Image, and nothing is signed!  
 So it's very easy to customize your ZoneDirector.
 
-The script below patches any ZD1200 Software Image so that you always have 64 AP licenses and your Upgrade entitlement ends in 2027.
+The script below patches any ZD1200 Software Image so that you always have 64 AP licenses and your Upgrade entitlement ends in 2027.  
+If you already have the latest software version or you have no active support then just download, patch & apply the version you're currently running.
 
 Save the script below to e.g. `patch_zd_image.sh`, then you can patch any ZD1200 installation:-
 ```bash
