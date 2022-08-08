@@ -2,96 +2,11 @@
 
 This code works for ZoneDirector & Unleashed backups and debug logs, and also ZoneDirector Software Images.
 
-There's a C# and Python version. The C# version is much more efficient, so use that if you have a choice (or want to convert the algorithm to a different language).
-
-## Ruckus Crypt PowerShell Functions (using C#)
-```powershell
-Add-Type -Language CSharp @"
-using System;
-using System.IO;
-namespace Ms264556
-{
-    public static class Ruckus
-    {
-        private static readonly byte[] XorBytes = new byte[] { 0x29, 0x1A, 0x42, 0x05, 0xbd, 0x2c, 0xd6, 0xf2, 0x1c, 0xb7, 0xfa, 0xe5, 0x82, 0x78, 0x13, 0xca };
-
-        public static void DecryptFile(string sourcePath, string destinationPath)
-        {
-            var inputBlock = new byte[8];
-            var previousInputBlock = new byte[8];
-            var outputBlock = new byte[8];
-
-            using (var input = File.OpenRead(sourcePath))
-            using (var output = File.Open(destinationPath, FileMode.Create))
-            {
-                int offset = 0;
-                while (true)
-                {
-                    var bytesRead = input.Read(inputBlock, 0, 8);
-
-                    if (offset > 7)
-                    {
-                        var bytesToWrite = bytesRead == 0 ? (8 - outputBlock[7]) & 0xf : 8;
-                        if (bytesToWrite > 0) { output.Write(outputBlock, 0, bytesToWrite); }
-                    }
-
-                    if (bytesRead == 0) break;
-                    if (bytesRead != 8) throw new Exception("Corrupt input file");
-
-                    for (int i = 0; i < bytesRead; i++)
-                    {
-                        outputBlock[i] = (byte)(XorBytes[offset++ % 16] ^ inputBlock[i] ^ previousInputBlock[i]);
-                        previousInputBlock[i] = inputBlock[i];
-                    }
-                }
-            }
-        }
-
-        public static void EncryptFile(string sourcePath, string destinationPath)
-        {
-            var inputBlock = new byte[8];
-            var previousInputBlock = new byte[8];
-
-            using (var input = File.OpenRead(sourcePath))
-            using (var output = File.Open(destinationPath, FileMode.Create))
-            {
-                int offset = 0;
-                while (true)
-                {
-                    var bytesRead = input.Read(inputBlock, 0, 8);
-                    if (bytesRead < 8)
-                    {
-                        byte paddingBytes = (byte)(8 - bytesRead);
-                        byte padding = (byte)(paddingBytes | paddingBytes << 4);
-                        for (int i = 0; i < paddingBytes; i++) { inputBlock[i + bytesRead] = padding; }
-                    }
-
-                    for (int i = 0; i < 8; i++)
-                    {
-                        inputBlock[i] = (byte)(XorBytes[offset++ % 16] ^ inputBlock[i] ^ previousInputBlock[i]);
-                        previousInputBlock[i] = inputBlock[i];
-                    }
-                    output.Write(inputBlock, 0, 8);
-
-                    if (bytesRead < 8) break;
-                }
-            }
-        }
-    }
-}
-"@;
-```
-### Decrypt a backup
-```powershell
-[Ms264556.Ruckus]::DecryptFile("C:\Users\Ms264556\Downloads\ruckus_db_073122_14_17.bak", "C:\Users\Ms264556\Downloads\ruckus_db_073122_14_17.bak.tgz")
-```
-### Re-encrypt a backup
-```powershell
-[Ms264556.Ruckus]::EncryptFile("C:\Users\Ms264556\Downloads\ruckus_db_073122_14_17.bak.tgz", "C:\Users\Ms264556\Downloads\ruckus_db_073122_14_17.modded.bak")
-```
+There is a Windows Powershell/C# version below 
 
 ## Ruckus Crypt bash Functions (using Python)
-> Python turned out to be really slow to work with bytes (80 seconds to process a ~170MB ZoneDirector image on my PC), so I changed the Python version to work with a struct of ints instead. If you're just processing backups then this is unimportant: they're tiny so they only take a second.
+
+> Python turned out to be really slow to work with bytes (80 seconds to process a ~170MB ZoneDirector image on my PC), so this is more ugly and complicated than the C# version below.
 
 ```bash
 function rks_encrypt {
@@ -220,4 +135,94 @@ echo '#*_ljpdRdtm/]2*i`SPSK.:%Li/aZDKts5J?pUJX+lp[t]b!RQ+,=-dmx0TE`U' | tr ' -}'
 
 ```
 $+`mkqeSeun0^3+jaTQTL/;&amp;Mj0b[ELut6K@qVKY,mq\u^c&quot;SR,-&gt;.eny1UFaV
+```
+
+## Ruckus Crypt PowerShell Functions (using C#)
+
+>These functions are much quicker than the python functions. They use much less memory, and it's easier to see the algorithm too.   
+>But if you want to process your backup for re-upload then you need to be careful to use unix line endings in a few places, so it will probably be easier to tinker in WSL if you're a Windows user.
+
+```powershell
+Add-Type -Language CSharp @"
+using System;
+using System.IO;
+namespace Ms264556
+{
+    public static class Ruckus
+    {
+        private static readonly byte[] XorBytes = new byte[] { 0x29, 0x1A, 0x42, 0x05, 0xbd, 0x2c, 0xd6, 0xf2, 0x1c, 0xb7, 0xfa, 0xe5, 0x82, 0x78, 0x13, 0xca };
+
+        public static void DecryptFile(string sourcePath, string destinationPath)
+        {
+            var inputBlock = new byte[8];
+            var previousInputBlock = new byte[8];
+            var outputBlock = new byte[8];
+
+            using (var input = File.OpenRead(sourcePath))
+            using (var output = File.Open(destinationPath, FileMode.Create))
+            {
+                int offset = 0;
+                while (true)
+                {
+                    var bytesRead = input.Read(inputBlock, 0, 8);
+
+                    if (offset > 7)
+                    {
+                        var bytesToWrite = bytesRead == 0 ? (8 - outputBlock[7]) & 0xf : 8;
+                        if (bytesToWrite > 0) { output.Write(outputBlock, 0, bytesToWrite); }
+                    }
+
+                    if (bytesRead == 0) break;
+                    if (bytesRead != 8) throw new Exception("Corrupt input file");
+
+                    for (int i = 0; i < bytesRead; i++)
+                    {
+                        outputBlock[i] = (byte)(XorBytes[offset++ % 16] ^ inputBlock[i] ^ previousInputBlock[i]);
+                        previousInputBlock[i] = inputBlock[i];
+                    }
+                }
+            }
+        }
+
+        public static void EncryptFile(string sourcePath, string destinationPath)
+        {
+            var inputBlock = new byte[8];
+            var previousInputBlock = new byte[8];
+
+            using (var input = File.OpenRead(sourcePath))
+            using (var output = File.Open(destinationPath, FileMode.Create))
+            {
+                int offset = 0;
+                while (true)
+                {
+                    var bytesRead = input.Read(inputBlock, 0, 8);
+                    if (bytesRead < 8)
+                    {
+                        byte paddingBytes = (byte)(8 - bytesRead);
+                        byte padding = (byte)(paddingBytes | paddingBytes << 4);
+                        for (int i = 0; i < paddingBytes; i++) { inputBlock[i + bytesRead] = padding; }
+                    }
+
+                    for (int i = 0; i < 8; i++)
+                    {
+                        inputBlock[i] = (byte)(XorBytes[offset++ % 16] ^ inputBlock[i] ^ previousInputBlock[i]);
+                        previousInputBlock[i] = inputBlock[i];
+                    }
+                    output.Write(inputBlock, 0, 8);
+
+                    if (bytesRead < 8) break;
+                }
+            }
+        }
+    }
+}
+"@;
+```
+### Decrypt a backup
+```powershell
+[Ms264556.Ruckus]::DecryptFile("C:\Users\Ms264556\Downloads\ruckus_db_073122_14_17.bak", "C:\Users\Ms264556\Downloads\ruckus_db_073122_14_17.bak.tgz")
+```
+### Re-encrypt a backup
+```powershell
+[Ms264556.Ruckus]::EncryptFile("C:\Users\Ms264556\Downloads\ruckus_db_073122_14_17.bak.tgz", "C:\Users\Ms264556\Downloads\ruckus_db_073122_14_17.modded.bak")
 ```
