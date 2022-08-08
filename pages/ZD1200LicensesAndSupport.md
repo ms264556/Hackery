@@ -9,9 +9,6 @@ To prevent e-waste and save these from landfills, I provide a procedure to enabl
 >If you have a ZoneDirector 1000/1100/3000/5000 then you can still add AP Licenses, but you'll have to (temporarily) install older software.  
 >Follow the instructions here: [Add AP Licenses to a ZoneDirector](ZDAddLicenses.md)
 
-The ZoneDirector upgrade process just runs a script (`ac_upg.sh`) from the Software Image, and nothing is signed!  
-So it's very easy to customize your ZoneDirector.
-
 The script below patches any ZD1200 Software Image so that you always have 64 AP licenses and your Upgrade entitlement ends in 2027.  
 If you already have the latest software version or you have no active support then just download, patch & apply the version you're currently running.
 
