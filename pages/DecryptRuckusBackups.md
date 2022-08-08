@@ -199,6 +199,10 @@ find bakimg -printf "%P\n" | tar -czf ruckus.modded.bak.tgz --no-recursion -C ba
 rks_encrypt ruckus.modded.bak.tgz ruckus.modded.bak
 ```
 
+All done. Restore your modified backup.
+
+#### Encoding DPSK Passphrases
+
 >The only tricky part is the `x-passphrase` attribute for each `<dpsk>`.  
 >This needs to be ROT1 encoded, and then HTML encoded. E.g. for the passphrase:-
 
