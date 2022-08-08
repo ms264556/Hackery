@@ -2,7 +2,7 @@
 
 The ZoneDirector upgrade process just runs a script (`ac_upg.sh`) from the Software Image, and nothing is signed! So it's very easy to customize your ZoneDirector.
 
-You'll need the to decrypt/encrypt the images. I include bash functions to do this here. If you prefer C# then look in the Decryption/Encryption page.
+You'll need to decrypt/encrypt the images. I include bash functions to do this here. If you prefer C# then look in the Decryption/Encryption page.
 
 ## Ruckus Crypt bash Functions (using Python)
 > Use the C# version on the Decrypt/Encrypt page if you want something much faster.
