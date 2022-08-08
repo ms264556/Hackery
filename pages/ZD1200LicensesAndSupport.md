@@ -4,7 +4,7 @@ Ruckus ships ZoneDirector controllers with a license to control a limited number
 In addition, Ruckus will prevent you from applying software upgrades to your ZoneDirector unless you have an active Support Contract.
 
 Unfortunately Ruckus won't sell you AP licenses or support contracts unless you are the original purchaser of the ZoneDirector.   
-To prevent e-waste and save these from landfills, I provide a procedure to enable upgrades and apply free AP licenses to your ZoneDirector for use in a homelab or personal environment.
+To prevent e-waste and save these from landfills, you may use the procedure here to enable upgrades and apply free AP licenses to your ZoneDirector for use in a homelab or personal environment.
 
 >If you have a ZoneDirector 1000/1100/3000/5000 then you can still add AP Licenses, but you'll have to (temporarily) install older software.  
 >Follow the instructions here: [Add AP Licenses to a ZoneDirector](ZDAddLicenses.md)
