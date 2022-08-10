@@ -94,7 +94,7 @@ pushd zdimage
 
 cat <<EOF >support-list.xml
 <support-list>
-	<support zd-serial-number="YOUR_ZD_SERIAL_HERE" service-purchased="904" date-start="1659801540" date-end="1817135940" ap-support-number="licensed" DELETABLE="false"></support>
+	<support zd-serial-number="ZD_SERIAL_PLACEHOLDER" service-purchased="904" date-start="1659801540" date-end="1817135940" ap-support-number="licensed" DELETABLE="false"></support>
 <signature>
 </signature>
 </support-list>
@@ -102,7 +102,7 @@ EOF
 
 cat <<EOF >license-list.xml
 <license-list name="64 AP Management" max-ap="64" max-client="4000" value="0x0000000f" urlfiltering-ap-license="0">
-    <license id="1" name="59 AP Management" inc-ap="59" generated-by="264556" serial-number="YOUR_ZD_SERIAL_HERE" status="0" detail="" />
+    <license id="1" name="59 AP Management" inc-ap="59" generated-by="264556" serial-number="ZD_SERIAL_PLACEHOLDER" status="0" detail="" />
 </license-list>
 EOF
 
@@ -111,8 +111,8 @@ tar -xvf zd.img.tar ac_upg.sh
 sed -i -e 's/echo "FILE:`\/usr\/bin\/md5sum \.\/\$ZD_KERNEL`" >>\/mnt\/file_list\.txt/echo "FILE:`\/usr\/bin\/md5sum \.\/\$ZD_KERNEL`" >>\/mnt\/file_list\.txt \
                             SN=`cat \/bin\/SERIAL` \
                             tar xvf \$ZD_UPG_IMG support-list\.xml license-list\.xml -C \/mnt\/etc\/persistent-scripts \
-                            sed -i -e "s\/YOUR_ZD_SERIAL_HERE\/\$SN\/" \/mnt\/etc\/persistent-scripts\/support-list\.xml \
-                            sed -i -e "s\/YOUR_ZD_SERIAL_HERE\/\$SN\/" \/mnt\/etc\/persistent-scripts\/license-list\.xml \
+                            sed -i -e "s\/ZD_SERIAL_PLACEHOLDER\/\$SN\/" \/mnt\/etc\/persistent-scripts\/support-list\.xml \
+                            sed -i -e "s\/ZD_SERIAL_PLACEHOLDER\/\$SN\/" \/mnt\/etc\/persistent-scripts\/license-list\.xml \
                             CUR_WRAP_MD5=`md5sum \/mnt\/bin\/sys_wrapper\.sh | cut -d\x27 \x27 -f1` \
                             sed -i -e \x27s\/uudecode\.\*signature\\\.ud\.\*signature\\\.tmp\.\*\/cat \\\/etc\\\/persistent-scripts\\\/support-list\\\.xml > support\\n        cat \\\/etc\\\/persistent-scripts\\\/license-list\\\.xml >\\\/etc\\\/airespider\\\/license-list\\\.xml\/\x27 -e \x27s\/openssl\.\*dgst \.\*verify \.\*signature\\\.ud \.\*support\\\.tmp\/true\/\x27 \/mnt\/bin\/sys_wrapper\.sh \
                             NEW_WRAP_MD5=`md5sum \/mnt\/bin\/sys_wrapper\.sh | cut -d\x27 \x27 -f1` \
