@@ -81,7 +81,7 @@ rks_encrypt zd1200_10.5.1.0.176.ap_10.5.1.0.176.img.tgz zd1200_10.5.1.0.176.ap_1
 ```bash
 rks_decrypt zd1200_10.5.1.0.176.ap_10.5.1.0.176.img zd1200_10.5.1.0.176.ap_10.5.1.0.176.img.tgz
 gzip -d zd1200_10.5.1.0.176.ap_10.5.1.0.176.img.tgz
-tar -xvf zd1200_10.5.1.0.176.ap_10.5.1.0.176.img.tar ac_upg.sh metadata
+tar -xvf zd1200_10.5.1.0.176.ap_10.5.1.0.176.img.tar ac_upg.sh
 ```
 
 ### Injecting content during the upgrade process 
@@ -109,7 +109,7 @@ cd $popd;
 ### Repackage the image
 
 ```bash
-tar uvf zd1200_10.5.1.0.176.ap_10.5.1.0.176.img.tar ac_upg.sh metadata
+tar uvf zd1200_10.5.1.0.176.ap_10.5.1.0.176.img.tar ac_upg.sh
 gzip zd1200_10.5.1.0.176.ap_10.5.1.0.176.img.tar
 rks_encrypt zd1200_10.5.1.0.176.ap_10.5.1.0.176.img.tar.gz zd1200_10.5.1.0.176.ap_10.5.1.0.176.patched.img
 ```
