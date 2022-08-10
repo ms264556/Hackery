@@ -15,7 +15,9 @@ Ensure the installed software was released in November 2019 or earlier. Otherwis
 
 > If you have already configured your ZD, then backup your configuration (`Administer` > `Back up`). Make a note of your current software version - you'll need to upgrade to this exact version to restore your configuration backup.
 
-> If you can't install firmware because your support has expired, do a factory reset (_after_ you've backed up your configuration, if you don't want to lose it!). So long as the ZD has internet access then it will grab a 30 day support entitlement. Now you can upgrade/downgrade your firmware.
+> If you can't install firmware because your support has expired, download a 30 day support entitlement file from [https://supportactivation.ruckuswireless.com/](https://supportactivation.ruckuswireless.com/) and upload this to your ZoneDirector.  
+> Alternatively, do a factory reset (_after_ you've backed up your configuration, if you don't want to lose it!). So long as the ZD has internet access then it will grab a 30 day support entitlement.  
+> Now you can upgrade/downgrade your firmware.
 
 ## 2) Obtain a root shell
 SSH into the ZD *using the same credentials you use to log into the web dashboard*, then break out to a root shell:
