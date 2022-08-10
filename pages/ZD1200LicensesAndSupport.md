@@ -107,7 +107,7 @@ cat <<EOF >license-list.xml
 EOF
 
 gzip -d zd.img.tgz
-tar -xvf zd.img.tar ac_upg.sh metadata
+tar -xvf zd.img.tar ac_upg.sh
 sed -i -e 's/echo "FILE:`\/usr\/bin\/md5sum \.\/\$ZD_KERNEL`" >>\/mnt\/file_list\.txt/echo "FILE:`\/usr\/bin\/md5sum \.\/\$ZD_KERNEL`" >>\/mnt\/file_list\.txt \
                             SN=`cat \/bin\/SERIAL` \
                             tar xvf \$ZD_UPG_IMG support-list\.xml license-list\.xml -C \/mnt\/etc\/persistent-scripts \
@@ -117,7 +117,7 @@ sed -i -e 's/echo "FILE:`\/usr\/bin\/md5sum \.\/\$ZD_KERNEL`" >>\/mnt\/file_list
                             sed -i -e \x27s\/uudecode\.\*signature\\\.ud\.\*signature\\\.tmp\.\*\/cat \\\/etc\\\/persistent-scripts\\\/support-list\\\.xml > support\\n        cat \\\/etc\\\/persistent-scripts\\\/license-list\\\.xml >\\\/etc\\\/airespider\\\/license-list\\\.xml\/\x27 -e \x27s\/openssl\.\*dgst \.\*verify \.\*signature\\\.ud \.\*support\\\.tmp\/true\/\x27 \/mnt\/bin\/sys_wrapper\.sh \
                             NEW_WRAP_MD5=`md5sum \/mnt\/bin\/sys_wrapper\.sh | cut -d\x27 \x27 -f1` \
                             sed -i -e "s\/\$CUR_WRAP_MD5\/\$NEW_WRAP_MD5\/" \/file_list\.txt/' ac_upg.sh
-tar uvf zd.img.tar ac_upg.sh metadata support-list.xml license-list.xml
+tar uvf zd.img.tar ac_upg.sh support-list.xml license-list.xml
 gzip zd.img.tar
 popd
 rks_encrypt zdimage/zd.img.tar.gz "$2"
