@@ -34,8 +34,13 @@ Job done.
 ## Removing the country lock (for pre-2020 AP models)
 
 ### 1) Obtain a root shell
+
 The unlocking procedure requires you to *temporarily* install an older software version.  
-Ensure the installed access point software was released in November 2019 or earlier. Otherwise, download an older version from [https://support.ruckuswireless.com/software](https://support.ruckuswireless.com/software) and do an 'upgrade'.
+Ensure the installed access point software was released in November 2019 or earlier. Otherwise, download an older version from [https://support.ruckuswireless.com/software](https://support.ruckuswireless.com/software) and do an 'upgrade'.  
+
+> If you can't install firmware because your support has expired, download a 30 day support entitlement file from [https://supportactivation.ruckuswireless.com/](https://supportactivation.ruckuswireless.com/) and upload this to your ZoneDirector.  
+> Alternatively, do a factory reset (_after_ you've backed up your configuration, if you don't want to lose it!). So long as the ZD has internet access then it will grab a 30 day support entitlement.  
+> Now you can upgrade/downgrade your firmware.
 
 SSH into the AP *using the same credentials you use to log into the web dashboard*, then break out to a root shell. There is a different procedure depending on whether or not your AP is running Unleashed software:
 
