@@ -18,6 +18,27 @@ ruckus$
 
 > You won't be able to see yourself typing `stty echo`. Calling `stty echo` restores local echo so you can see what you're typing.
 
+### Making changes to your ZoneDirector
+
+`/` is mounted read-only.
+Anything which needs to be writable is either linked into `/writable` or is in a tmpfs mount.  
+
+Your ZoneDirector configuration lives in `/etc/airespider`, which is a link to `/writable/etc/airespider` - so  you can edit these and the changes will be persistent.  
+The factory-default versions of these files lives in `/etc/airespider-defaults`, in case you need to refer to them.
+
+If you need to make changes outside the `/writable` mount, then you can temporarily mount `/` read/write:-
+
+```bash
+mount -o remount,rw /
+
+# now make your modifications
+
+mount -o remount,ro /
+```
+
+Many configuration functions are delegated to `/bin/sys_wrapper.sh`. If you're wanting to tweak some behaviour then this is a good first place to check.  
+
+
 ## Patch from Linux or WSL
 
 The script below patches a ZD1200 Software Image so that it includes a root shell, 64 AP licenses and an Upgrade entitlement ending in 2027.  
