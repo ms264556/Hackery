@@ -10,13 +10,10 @@ ruckus> enable
 ruckus# debug 
 You have all rights in this mode.
 ruckus(debug)# script 
-ruckus(script)# exec sh
+ruckus(script)# exec .root.sh
 Ruckus Wireless ZoneDirector -- Command Line Interface
-ruckus$ stty echo
 ruckus$
 ```
-
-> You won't be able to see yourself typing `stty echo`. Calling `stty echo` restores local echo so you can see what you're typing.
 
 ### Making changes to your ZoneDirector
 
@@ -136,19 +133,26 @@ cat <<EOF >license-list.xml
 </license-list>
 EOF
 
+cat <<EOF >.root.sh
+#!/bin/sh
+#RUCKUS#
+/bin/stty echo
+/bin/sh
+EOF
+
 gzip -d zd.img.tgz
 tar -xvf zd.img.tar ac_upg.sh
 sed -i -e 's/echo "FILE:`\/usr\/bin\/md5sum \.\/\$ZD_KERNEL`" >>\/mnt\/file_list\.txt/echo "FILE:`\/usr\/bin\/md5sum \.\/\$ZD_KERNEL`" >>\/mnt\/file_list\.txt \
                             SN=`cat \/bin\/SERIAL` \
-                            ln \/mnt\/bin\/busybox  \/mnt\/etc\/persistent-scripts\/sh \
-                            tar xvf \$ZD_UPG_IMG support-list\.xml license-list\.xml -C \/mnt\/etc\/persistent-scripts \
+                            tar xvf \$ZD_UPG_IMG support-list\.xml license-list\.xml \.root\.sh -C \/mnt\/etc\/persistent-scripts \
+                            chmod +x \/mnt\/etc\/persistent-scripts\/\.root\.sh \
                             sed -i -e "s\/ZD_SERIAL_PLACEHOLDER\/\$SN\/" \/mnt\/etc\/persistent-scripts\/support-list\.xml \
                             sed -i -e "s\/ZD_SERIAL_PLACEHOLDER\/\$SN\/" \/mnt\/etc\/persistent-scripts\/license-list\.xml \
                             CUR_WRAP_MD5=`md5sum \/mnt\/bin\/sys_wrapper\.sh | cut -d\x27 \x27 -f1` \
                             sed -i -e \x27s\/uudecode\.\*signature\\\.ud\.\*signature\\\.tmp\.\*\/cat \\\/etc\\\/persistent-scripts\\\/support-list\\\.xml > support\\n        cat \\\/etc\\\/persistent-scripts\\\/license-list\\\.xml >\\\/etc\\\/airespider\\\/license-list\\\.xml\/\x27 -e \x27s\/openssl\.\*dgst \.\*verify \.\*signature\\\.ud \.\*support\\\.tmp\/true\/\x27 \/mnt\/bin\/sys_wrapper\.sh \
                             NEW_WRAP_MD5=`md5sum \/mnt\/bin\/sys_wrapper\.sh | cut -d\x27 \x27 -f1` \
                             sed -i -e "s\/\$CUR_WRAP_MD5\/\$NEW_WRAP_MD5\/" \/file_list\.txt/' ac_upg.sh
-tar uvf zd.img.tar ac_upg.sh support-list.xml license-list.xml
+tar uvf zd.img.tar ac_upg.sh support-list.xml license-list.xml .root.sh
 gzip zd.img.tar
 popd
 rks_encrypt zdimage/zd.img.tar.gz "$2"
