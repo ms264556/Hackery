@@ -33,14 +33,11 @@ ruckus(script)# exec ../../../bin/sh
 Ruckus Wireless ZoneDirector -- Command Line Interface
 Enter 'help' for a list of built-in commands.
 
-ruckus$ ruckus_cli2
-Welcome to the Ruckus Wireless ZoneDirector 1200 Command Line Interface
-
-ruckus> exit
+ruckus$ stty echo
 ruckus$
 ```
 
-> You won't be able to see yourself typing `ruckus_cli2`. Calling `ruckus_cli2` then `exit` restores local echo so you can see what you're typing.
+> You won't be able to see yourself typing `stty echo`. Calling `stty echo` restores local echo so you can see what you're typing.
 
 ## 3) Now increase your license count
 
