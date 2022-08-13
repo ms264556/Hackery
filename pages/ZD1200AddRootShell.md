@@ -24,7 +24,7 @@ ruckus$
 Anything which needs to be writable is either linked into `/writable` or is in a tmpfs mount.  
 
 Your ZoneDirector configuration lives in `/etc/airespider`, which is a link to `/writable/etc/airespider` - so  you can edit these and the changes will be persistent.  
-The factory-default versions of these files lives in `/etc/airespider-defaults`, in case you need to refer to them.
+The factory-default versions of these files live in `/etc/airespider-defaults`, in case you need to refer to them.
 
 If you need to make changes outside the `/writable` mount, then you can temporarily mount `/` read/write:-
 
