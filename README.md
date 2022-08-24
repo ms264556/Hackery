@@ -27,3 +27,5 @@ Just hacks and code snippets which might be useful to someone else.
 [Sharing a Bluetooth Keyboard between Linux and Windows](pages/BluetoothKeyboardViaKVM.md)
 
 [Setting up a hotkey to switch between Linux and Windows](pages/InputSwitchHotkey.md)
+
+[Setting up a hotkey to switch PbP Pn/Off](pages/DellPbPSwitch.md)
