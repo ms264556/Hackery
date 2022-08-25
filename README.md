@@ -14,6 +14,8 @@ Just hacks and code snippets which might be useful to someone else.
 
 [Let pfSense push Let's Encrypt certificates to your Ruckus Unleashed or ZoneDirector](pages/PfSenseLetsEncryptToRuckus.md)
 
+[Forgotten your Unleashed or ZoneDirector password, but you have a backup?](pages/ExtractRuckusAdminUserPass.md)
+
 [Decrypt, Edit, Re-encrypt Ruckus Backups](pages/DecryptRuckusBackups.md)
 
 * [Restore a Disallowed Backup (mismatched version or hardware)](pages/DecryptRuckusBackups.md#restore-onto-mismatched-firmware-version--downlevel-hardware)
