@@ -1,9 +1,9 @@
 # Add AP Licenses to a ZoneDirector
 
 Ruckus ships ZoneDirector controllers with a license to control a limited number of Access Points.   
-Extra APs can be controlled by purchasing and uploading a license file.
+Extra APs can be controlled by purchasing and uploading a license file.  
+> Unfortunately Ruckus won't sell you AP licenses unless you are the original purchaser of the ZoneDirector.   
 
-Unfortunately Ruckus won't sell you AP licenses unless you are the original purchaser of the ZoneDirector.   
 To prevent e-waste and save these from landfills, you may use the procedure here to apply free AP licenses to your ZoneDirector for use in a homelab or personal environment.
 
 >If you have a ZoneDirector 1200 then you can add AP Licenses without having to install older software.  
