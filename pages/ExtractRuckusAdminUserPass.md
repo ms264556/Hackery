@@ -34,7 +34,7 @@ with open(input_path, 'rb') as input_file:
         output_file.seek(0)
         with tarfile.open(fileobj = output_file) as tar:
             system_xml = tar.extractfile('etc/airespider/system.xml').read()
-            tree = ET.ElementTree(ET.fromstring(system_xml))
+            tree = ET.fromstring(system_xml)
             admin = tree.find('./admin')
             username = admin.attrib['username']
             x_password = admin.attrib['x-password']
