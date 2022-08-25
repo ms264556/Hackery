@@ -15,7 +15,7 @@ To prevent e-waste and save these from landfills, you may use the procedure here
 The script below patches any ZD1200 Software Image so that you always have 64 AP licenses and your Upgrade entitlement ends in 2027.  
 If you already have the latest software version or you have no active support then just download, patch & apply the version you're currently running.
 
-Save the script below to e.g. `patch_zd_image.sh`, then you can patch any ZD1200 installation:-
+Save the script below to e.g. `patch_zd_image.sh`, make the script executable (e.g. `chmod +x patch_zd_image.sh`) then you can patch any ZD1200 installation:-
 ```bash
 ./patch_zd_image.sh zd1200_10.5.1.0.176.ap_10.5.1.0.176.img patched1051.img
 ```
