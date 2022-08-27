@@ -116,25 +116,24 @@ rks_encrypt zd1200_10.5.1.0.176.ap_10.5.1.0.176.img.tar.gz zd1200_10.5.1.0.176.a
 
 Now you can use the image to do an upgrade directly from the Web UI.
 
-## Directly editing the ext2 root image
+### Making changes directly to your ZoneDirector
 
-This doesn't work so far. I tried the below, but the ZoneDirector just rebooted into the un-upgraded software.  
-If you have time and manage to get this working then let me know.
+If you want to tinker then you can [patch a root shell into your ZoneDirector](ZD1200AddRootShell.md).
+
+
+`/` is mounted read-only.
+Anything which needs to be writable is either linked into `/writable` or is in a tmpfs mount.  
+
+Your ZoneDirector configuration files live in `/etc/airespider` - which is a link to `/writable/etc/airespider` - so  you can edit these files and the changes will be persistent.  
+The factory-default versions of these files live in `/etc/airespider-defaults`, in case you need to refer to them.
+
+If you need to make changes outside of the `/writable` mount, then you can temporarily mount `/` read/write:-
 
 ```bash
-mkdir zdimage
-tar -xzvf zd1200_10.5.1.0.176.ap_10.5.1.0.176.decrypted.tgz -C zdimage
-mv zdimage/rootfs.i386.ext2.director1200.img rootfs.i386.ext2.director1200.img.gz
-gzip -d rootfs.i386.ext2.director1200.img.gz
-mkdir zdroot
-sudo mount -o loop,rw,noatime -t ext2 rootfs.i386.ext2.director1200.img zdroot
-pushd zdroot/etc/persistent-scripts/
-sudo ln -s ../../bin/busybox sh
-popd
-sudo umount zdroot
-gzip rootfs.i386.ext2.director1200.img
-mv rootfs.i386.ext2.director1200.img.gz zdimage/rootfs.i386.ext2.director1200.img
-md5sum zdimage/rootfs.i386.ext2.director1200.img # copy the md5
-nano zdimage/metadata # paste the new md5 over the old ROOTFS_MD5SUM
-find zdimage -printf "%P\n" | tar -czf zd1200_10.5.1.0.176.ap_10.5.1.0.176.modified.tgz --no-recursion -C zdimage -T -
+mount -o remount,rw /
+# ...now make your modifications
+# then remount ro when you're done...
+mount -o remount,ro /
 ```
+
+Many configuration functions are delegated to `/bin/sys_wrapper.sh`. If you're wanting to tweak some behaviour then this is a good first place to check.  
