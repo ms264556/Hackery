@@ -17,7 +17,7 @@ ruckus$
 
 ## Download and Patch a software Image (from Linux or WSL)
 
-The script below patches a ZD1200 Software Image so that it includes a root shell, 64 AP licenses and an Upgrade entitlement ending in 2027.  
+The script below patches a ZD1200 Software Image so that it includes a root shell, 75 AP licenses and an Upgrade entitlement ending in 2027.  
 If you already have the latest software version or you have no active support then just download, patch & apply the version you're currently running.
 
 Save the script below to e.g. `patch_zd_image.sh`, make it executable (e.g. `chmod +x patch_zd_image.sh`), then you can patch any ZD1200 installation:-
