@@ -12,7 +12,9 @@ To prevent e-waste and save these from landfills, you may use the procedure here
 >If you have a ZoneDirector 1000/1100/3000/5000 then you can still add AP Licenses, but you'll have to (temporarily) install older software.  
 >Follow the instructions here: [Add AP Licenses to a ZoneDirector](ZDAddLicenses.md)
 
-The script below patches any ZD1200 Software Image so that you always have 64 AP licenses and your Upgrade entitlement ends in 2027.  
+>If you also want a root shell, follow the instructions here: [Add a Root Shell to your ZoneDirector 1200](ZD1200AddRootShell.md)
+
+The script below patches any ZD1200 Software Image so that you always have 75 AP licenses and your Upgrade entitlement ends in 2027.  
 If you already have the latest software version or you have no active support then just download, patch & apply the version you're currently running.
 
 Save the script below to e.g. `patch_zd_image.sh`, make the script executable (e.g. `chmod +x patch_zd_image.sh`) then you can patch any ZD1200 installation:-
@@ -95,32 +97,36 @@ rks_decrypt "$1" zdimage/zd.img.tgz
 
 pushd zdimage
 
-cat <<EOF >support-list.xml
-<support-list>
-	<support zd-serial-number="ZD_SERIAL_PLACEHOLDER" service-purchased="904" date-start="1659801540" date-end="1817135940" ap-support-number="licensed" DELETABLE="false"></support>
-<signature>
-</signature>
-</support-list>
-EOF
-
-cat <<EOF >license-list.xml
-<license-list name="64 AP Management" max-ap="64" max-client="4000" value="0x0000000f" urlfiltering-ap-license="0">
-    <license id="1" name="59 AP Management" inc-ap="59" generated-by="264556" serial-number="ZD_SERIAL_PLACEHOLDER" status="0" detail="" />
-</license-list>
-EOF
-
 gzip -d zd.img.tgz
 tar -xvf zd.img.tar ac_upg.sh
-sed -i -e 's/echo "FILE:`\/usr\/bin\/md5sum \.\/\$ZD_KERNEL`" >>\/mnt\/file_list\.txt/echo "FILE:`\/usr\/bin\/md5sum \.\/\$ZD_KERNEL`" >>\/mnt\/file_list\.txt \
-                            SN=`cat \/bin\/SERIAL` \
-                            tar xvf \$ZD_UPG_IMG support-list\.xml license-list\.xml -C \/mnt\/etc\/persistent-scripts \
-                            sed -i -e "s\/ZD_SERIAL_PLACEHOLDER\/\$SN\/" \/mnt\/etc\/persistent-scripts\/support-list\.xml \
-                            sed -i -e "s\/ZD_SERIAL_PLACEHOLDER\/\$SN\/" \/mnt\/etc\/persistent-scripts\/license-list\.xml \
-                            CUR_WRAP_MD5=`md5sum \/mnt\/bin\/sys_wrapper\.sh | cut -d\x27 \x27 -f1` \
-                            sed -i -e \x27s\/uudecode\.\*signature\\\.ud\.\*signature\\\.tmp\.\*\/cat \\\/etc\\\/persistent-scripts\\\/support-list\\\.xml > support\\n        cat \\\/etc\\\/persistent-scripts\\\/license-list\\\.xml >\\\/etc\\\/airespider\\\/license-list\\\.xml\/\x27 -e \x27s\/openssl\.\*dgst \.\*verify \.\*signature\\\.ud \.\*support\\\.tmp\/true\/\x27 \/mnt\/bin\/sys_wrapper\.sh \
-                            NEW_WRAP_MD5=`md5sum \/mnt\/bin\/sys_wrapper\.sh | cut -d\x27 \x27 -f1` \
-                            sed -i -e "s\/\$CUR_WRAP_MD5\/\$NEW_WRAP_MD5\/" \/file_list\.txt/' ac_upg.sh
-tar uvf zd.img.tar ac_upg.sh support-list.xml license-list.xml
+sed -i -e 's/echo "FILE:`\/usr\/bin\/md5sum \.\/\$ZD_KERNEL`" >>\/mnt\/file_list\.txt/echo "FILE:`\/usr\/bin\/md5sum \.\/\$ZD_KERNEL`" >>\/mnt\/file_list\.txt\
+cd \/mnt\/etc\/persistent-scripts\
+cat <<EOF >support\
+<support-list>\
+	<support zd-serial-number="`cat \/bin\/SERIAL`" service-purchased="904" date-start="1661705940" date-end="1819472340" ap-support-number="licensed" DELETABLE="false"><\/support>\
+<\/support-list>\
+EOF\
+cat <<EOF >license-list\.xml\
+<license-list name="75 AP Management" max-ap="75" max-client="4000" value="0x0000000f" urlfiltering-ap-license="0">\
+    <license id="1" name="70 AP Management" inc-ap="70" generated-by="264556" serial-number="`cat \/bin\/SERIAL`" status="0" detail="" \/>\
+<\/license-list>\
+EOF\
+tar -czf support\.spt support\
+CUR_WRAP_MD5=`md5sum \/mnt\/bin\/sys_wrapper\.sh | cut -d\x27 \x27 -f1`\
+sed -i -e \x27\/verify-upload-support)\/a \\\
+        cd \\\/tmp\\\
+        cat \\\/etc\\\/persistent-scripts\\\/support > support\\\
+        cat \\\/etc\\\/persistent-scripts\\\/license-list\\\.xml > \\\/etc\\\/airespider\\\/license-list\\\.xml\\\
+        echo "OK"\\\
+        ;;\\\
+    verify-upload-support-unpatched)\x27 -e \x27\/wget-support-entitlement)\/a \\\
+        cat \\\/etc\\\/persistent-scripts\\\/support\\\.spt > "\\\/tmp\\\/$1"\\\
+        echo "OK"\\\
+        ;;\\\
+    wget-support-entitlement-unpatched)\x27 \/mnt\/bin\/sys_wrapper\.sh\
+NEW_WRAP_MD5=`md5sum \/mnt\/bin\/sys_wrapper\.sh | cut -d\x27 \x27 -f1`\
+sed -i -e "s\/\$CUR_WRAP_MD5\/\$NEW_WRAP_MD5\/" \/mnt\/file_list\.txt/' ac_upg.sh
+tar uvf zd.img.tar ac_upg.sh
 gzip zd.img.tar
 popd
 rks_encrypt zdimage/zd.img.tar.gz "$2"
