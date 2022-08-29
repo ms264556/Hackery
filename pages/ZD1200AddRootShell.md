@@ -100,7 +100,7 @@ pushd zdimage
 
 gzip -d zd.img.tgz
 tar -xvf zd.img.tar ac_upg.sh
-sed -i -e 's/echo "FILE:`\/usr\/bin\/md5sum \.\/\$ZD_KERNEL`" >>\/mnt\/file_list\.txt/echo "FILE:`\/usr\/bin\/md5sum \.\/\$ZD_KERNEL`" >>\/mnt\/file_list\.txt\
+sed -i -e '/echo "FILE:`\/usr\/bin\/md5sum \.\/\$ZD_KERNEL`" >>\/mnt\/file_list\.txt/a \
 cd \/mnt\/etc\/persistent-scripts\
 cat <<EOF >support\
 <support-list>\
@@ -133,7 +133,7 @@ sed -i -e \x27\/verify-upload-support)\/a \\\
         ;;\\\
     wget-support-entitlement-unpatched)\x27 \/mnt\/bin\/sys_wrapper\.sh\
 NEW_WRAP_MD5=`md5sum \/mnt\/bin\/sys_wrapper\.sh | cut -d\x27 \x27 -f1`\
-sed -i -e "s\/\$CUR_WRAP_MD5\/\$NEW_WRAP_MD5\/" \/mnt\/file_list\.txt/' ac_upg.sh
+sed -i -e "s\/\$CUR_WRAP_MD5\/\$NEW_WRAP_MD5\/" \/mnt\/file_list\.txt' ac_upg.sh
 tar uvf zd.img.tar ac_upg.sh
 gzip zd.img.tar
 popd
