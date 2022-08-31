@@ -20,9 +20,9 @@ ruckus$
 The script below creates a dummy ZD1200 Software Image which installs a root shell, 150 AP licenses and an Upgrade entitlement ending in 2027.
 > The dummy Software Image will apply all changes as soon as it's uploaded. You won't actually be performing an upgrade.
 
-Save the script below to e.g. `patch_zd_image.sh`, make it executable (e.g. `chmod +x patch_zd_image.sh`), then you can patch any ZD1200 installation:-
+Save the script below to e.g. `create_patched_zdimage.sh`, make it executable (e.g. `chmod +x create_patched_zdimage.sh`), then you can create an upgrade installation image which can patch any ZD1200:-
 ```bash
-./patch_zd_image.sh zdpatch.img
+./create_patched_zdimage.sh zdpatch.img
 ```
 
 I've tested the script on ZD1200 releases 10.3 - 10.5 for both web and cli upgrades. It probably works on all other releases, but I haven't verified this.
