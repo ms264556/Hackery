@@ -102,6 +102,7 @@ cat <<EOF >.root.sh
 /bin/sh
 EOF
 chmod +x .root.sh
+ln -s -f .root.sh /writable/etc/scripts/.root.sh
 CUR_WRAP_MD5=\`md5sum /bin/sys_wrapper.sh | cut -d' ' -f1\`
 sed -i -e '/verify-upload-support)/a \\
         cd \/tmp\\
