@@ -5,7 +5,7 @@ To prevent e-waste and save these from landfills, you may use the procedure here
 >If you have a ZoneDirector 1000/1100/3000/5000 then you can still add AP Licenses, but you'll have to (temporarily) install older software.  
 >Follow the instructions here: [Add AP Licenses to a ZoneDirector](ZDAddLicenses.md)
 
->If you also want a root shell, follow the instructions here: [Add a Root Shell to your ZoneDirector 1200](ZD1200AddRootShell.md)
+>If you also want a root shell, follow the instructions here instead: [Add a Root Shell to your ZoneDirector 1200](ZD1200AddRootShell.md)
 
 [This patch](../images/zd.licenses.patch.img) should be uploaded as a Software Upgrade (`Administer` > `Upgrade` > `Software Upgrade`).  
 > The upload process completes the patching; no upgrade will be offered. Instead you will receive confirmation the patch has successfully completed.  
