@@ -1,9 +1,15 @@
 # Add a Root Shell to your ZoneDirector 1200
 
 Until late 2019 you could escape from the Ruckus CLI to a root shell.  
-You can add this functionality back to your ZoneDirector, if you'd find it useful.
+You can add this functionality back to your ZoneDirector, if you'd find it useful.  
 
-Once you've updated your ZoneDirector, to access the root shell from the CLI:-
+[This patch](../images/zd.root.and.licenses.patch.img) should be uploaded as a Software Upgrade (`Administer` > `Upgrade` > `Software Upgrade`).  
+> The upload process completes the patching; no upgrade will be offered. Instead you will be given instructions on using the root shell.
+> ![](../images/Root_Support_APs_1031.png)
+
+> The upgrade will also update your AP licensing (150 APs) and Upgrade Entitlement (until August 2027).
+
+In case you miss the instructions, to access the root shell from the CLI:-
 
 ```console
 ruckus> enable 
@@ -15,18 +21,13 @@ Ruckus Wireless ZoneDirector -- Command Line Interface
 ruckus$
 ```
 
-## Create a Patch Installation Image (from Linux or WSL)
+## Creating the Patch Installation Image yourself (from Linux or WSL)
 
-The script below creates a dummy ZD1200 Software Image which installs a root shell, 150 AP licenses and an Upgrade entitlement ending in 2027.
-> The dummy Software Image will apply all changes as soon as it's uploaded. You won't actually be performing an upgrade.
+> Although [the patch](../images/zd.root.and.licenses.patch.img) can be directly downloaded and used, I recommend either creating the patch yourself or [decrypting the patch](DecryptRuckusBackups.md) to verify it does only what it should.
 
-I've tested the patch on ZD1200 releases 10.3 - 10.5 for both web and cli upgrades. It probably works on all other releases, but I haven't verified this.
-
-> The patch is saved [here](../images/zd.root.and.licenses.patch.img), but I recommend either creating the patch yourself or decrypting the patch to verify it does only what it should.
-
-Save the script below to e.g. `create_patched_zdimage.sh`, make it executable (e.g. `chmod +x create_patched_zdimage.sh`), then you can create an upgrade installation image which can patch any ZD1200:-
+Save the script below to e.g. `create_patched_zdimage.sh`, make it executable (e.g. `chmod +x create_patched_zdimage.sh`), then you can create an upgrade an installation image:-
 ```bash
-./create_patched_zdimage.sh zdpatch.img
+./create_patched_zdimage.sh zd.root.and.licenses.patch.img
 ```
 
 ```bash
@@ -78,25 +79,13 @@ END
 
 cat <<END >upgrade_check.sh
 #!/bin/sh
-if [ -f /etc/persistent-scripts/support.spt ] ; then
-    echo "Patches already applied."
-    exit 0
-fi
+
+CUR_WRAP_MD5=\`md5sum /bin/sys_wrapper.sh | cut -d' ' -f1\`
+
 mount -o remount,rw /
-cat <<EOF >/etc/airespider-images/license-list.xml
-<license-list name="150 AP Management" max-ap="150" max-client="4000" value="0x0000000f" urlfiltering-ap-license="0">
-    <license id="1" name="145 AP Management" inc-ap="145" generated-by="264556" serial-number="\`cat /bin/SERIAL\`" status="0" detail="" />
-</license-list>
-EOF
+
 cd /etc/persistent-scripts
-cat <<EOF >support
-<support-list>
-	<support zd-serial-number="\`cat /bin/SERIAL\`" service-purchased="802" date-start="`date +%s`" date-end="1819731540" ap-support-number="licensed" DELETABLE="false"></support>
-</support-list>
-EOF
-sed 's/<support-list/<support-list status="1"/' support > /writable/etc/airespider/support-list.xml
-rm -f support.spt
-tar -czf support.spt support
+
 cat <<EOF >.root.sh
 #!/bin/sh
 #RUCKUS#
@@ -104,22 +93,50 @@ cat <<EOF >.root.sh
 /bin/sh
 EOF
 chmod +x .root.sh
-ln -s -f .root.sh /writable/etc/scripts/.root.sh
-CUR_WRAP_MD5=\`md5sum /bin/sys_wrapper.sh | cut -d' ' -f1\`
+rm -f /writable/etc/scripts/.root.sh
+ln -s -f /etc/persistent-scripts/.root.sh /writable/etc/scripts/.root.sh
+
+mkdir -p patch-storage
+cd patch-storage
+
+if [ -f sys_wrapper.sh ] ; then
+    cat sys_wrapper.sh > /bin/sys_wrapper.sh
+else
+    cat /bin/sys_wrapper.sh > sys_wrapper.sh
+fi
+cat <<EOF >support
+<support-list>
+	<support zd-serial-number="\`cat /bin/SERIAL\`" service-purchased="904" date-start="`date +%s`" date-end="1819731540" ap-support-number="licensed" DELETABLE="false"></support>
+</support-list>
+EOF
+sed 's/<support-list/<support-list status="1"/' support >/writable/etc/airespider/support-list.xml
+rm -f support.spt
+tar -czf support.spt support
+
+cat <<EOF >/etc/airespider-images/license-list.xml
+<license-list name="150 AP Management" max-ap="150" max-client="4000" value="0x0000000f" urlfiltering-ap-license="0">
+    <license id="1" name="145 AP Management" inc-ap="145" generated-by="264556" serial-number="\`cat /bin/SERIAL\`" status="0" detail="" />
+</license-list>
+EOF
+
 sed -i -e '/verify-upload-support)/a \\
         cd \/tmp\\
-        cat \/etc\/persistent-scripts\/support > support\\
+        cat \/etc\/persistent-scripts\/patch-storage\/support > support\\
         echo "OK"\\
         ;;\\
     verify-upload-support-unpatched)' -e '/wget-support-entitlement)/a \\
-        cat \/etc\/persistent-scripts\/support\.spt > "\/tmp\/\$1"\\
+        cat \/etc\/persistent-scripts\/patch-storage\/support\.spt > "\/tmp\/\$1"\\
         echo "OK"\\
         ;;\\
     wget-support-entitlement-unpatched)' /bin/sys_wrapper.sh
 NEW_WRAP_MD5=\`md5sum /bin/sys_wrapper.sh | cut -d' ' -f1\`
 sed -i -e "s/\$CUR_WRAP_MD5/\$NEW_WRAP_MD5/" /file_list.txt
+
 mount -o remount,ro /
-echo "Patches applied."
+
+echo "Added Upgrade Entitlement.\n<br />"
+echo "Added AP Licenses.\n<br />"
+echo "Root shell activated.\n<legend>Accessing the root shell from the CLI:-</legend>\n<pre><code><span class=\"text-muted\">ruckus> </span>enable\n<span class=\"text-muted\">ruckus# </span>debug\n<span class=\"text-success\">You have all rights in this mode.</span>\n<span class=\"text-muted\">ruckus(debug)# </span>script\n<span class=\"text-muted\">ruckus(script)# </span>exec .root.sh\n\n<span class=\"text-success\">Ruckus Wireless ZoneDirector -- Command Line Interface</span>\n<span class=\"text-success\">Enter &apos;help&apos; for a list of built-in commands.</span>\n\n<span class=\"text-muted\">ruckus\$ </span></code></pre>"
 END
 
 chmod +x upgrade_check.sh
@@ -129,7 +146,7 @@ rks_encrypt zd.patch.tgz "$1"
 rm all_files metadata upgrade_check.sh zd.patch.tgz
 ```
 
-## Patch a downloaded Software Installation Image (from Linux or WSL)
+## Create a pre-patched Software Installation Image (from Linux or WSL)
 
 The script below patches a ZD1200 Software Image so that it includes a root shell, 75 AP licenses and an Upgrade entitlement ending in 2027.  
 If you already have the latest software version or you have no active support then just download, patch & apply the version you're currently running.
