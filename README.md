@@ -14,15 +14,21 @@ Just hacks and code snippets which might be useful to someone else.
 
 [Let pfSense push Let's Encrypt certificates to your Ruckus Unleashed or ZoneDirector](pages/PfSenseLetsEncryptToRuckus.md)
 
-[Forgotten your Unleashed or ZoneDirector password, but you have a backup?](pages/ExtractRuckusAdminUserPass.md)
+[Retrieve forgotten passwords from your Unleashed or ZoneDirector backup](pages/ExtractRuckusAdminUserPass.md)
 
-[Decrypt, Edit, Re-encrypt Ruckus Backups](pages/DecryptRuckusBackups.md)
+[Enable Upgrades and Add Extra AP Licenses to your ZoneDirector for HomeLab Use](pages/ZD1200LicensesAndSupport.md)
+
+[Add a Root Shell Command to your ZoneDirector CLI for HomeLab Use](pages/ZD1200AddRootShell.md)
+
+[Add a Single-Use Root Shell Command to your ZoneDirector CLI](pages/ZD1200AddOneTimeRootShell.md)
+
+[More Information on Decrypting, Editing, Re-encrypting Ruckus Backups](pages/DecryptRuckusBackups.md)
 
 * [Restore a Disallowed Backup (mismatched version or hardware)](pages/DecryptRuckusBackups.md#restore-onto-mismatched-firmware-version--downlevel-hardware)
 
 * [Choose Passwords for DPSK Users](pages/DecryptRuckusBackups.md#choose-passwords-for-internal-dpsk-users)
 
-[Decrypt, Edit, Re-encrypt ZoneDirector Software Images](pages/CustomizeZoneDirectorSoftware.md)
+[More Information on Decrypting, Editing, Re-encrypting ZoneDirector Software Images](pages/CustomizeZoneDirectorSoftware.md)
 
 ## Dell Monitor KVM Hackery
 
