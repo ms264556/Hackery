@@ -2,12 +2,6 @@
 
 Just hacks and code snippets which might be useful to someone else.
 
-## Font hackery
-
-[A tweaked Verdana font for Programming (100% or 125% text scaling version)](pages/VerdanaVisualStudio.md)
-
-[A HiDPI-friendly Verdana font alternative for Programming (150%+ text scaling version)](pages/VerdanaRetinaVisualStudio.md)
-
 ## Ruckus Wireless Hackery
 
 [Change the Country Code on country-locked Ruckus Access Points](pages/RuckusCountryCodeChange.md)
@@ -29,6 +23,12 @@ Just hacks and code snippets which might be useful to someone else.
 * [Choose Passwords for DPSK Users](pages/DecryptRuckusBackups.md#choose-passwords-for-internal-dpsk-users)
 
 [More Information on Decrypting, Editing, Re-encrypting ZoneDirector Software Images](pages/CustomizeZoneDirectorSoftware.md)
+
+## Font hackery
+
+[A tweaked Verdana font for Programming (100% or 125% text scaling version)](pages/VerdanaVisualStudio.md)
+
+[A HiDPI-friendly Verdana font alternative for Programming (150%+ text scaling version)](pages/VerdanaRetinaVisualStudio.md)
 
 ## Dell Monitor KVM Hackery
 
