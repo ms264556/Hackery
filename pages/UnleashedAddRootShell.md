@@ -28,7 +28,7 @@ ruckus$
 
 Save the script below to e.g. `create_patched_unleash.sh`, make it executable (e.g. `chmod +x create_patched_zdimage.sh`), then you can create an upgrade an installation image:-
 ```bash
-./create_patched_zdimage.sh unleashed.root.patch.dbg
+./create_patched_unleash.sh unleashed.root.patch.dbg
 ```
 
 ```bash
