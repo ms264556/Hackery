@@ -12,6 +12,8 @@ Just hacks and code snippets which might be useful to someone else.
 
 [Enable Upgrades and Add Extra AP Licenses to your ZoneDirector for HomeLab Use](pages/ZD1200LicensesAndSupport.md)
 
+[Add a Root Shell Command to your Unleashed CLI for HomeLab Use](pages/UnleashedAddRootShell.md)
+
 [Add a Root Shell Command to your ZoneDirector CLI for HomeLab Use](pages/ZD1200AddRootShell.md)
 
 [Add a Single-Use Root Shell Command to your ZoneDirector CLI](pages/ZD1200AddOneTimeRootShell.md)
