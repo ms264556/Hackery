@@ -9,4 +9,4 @@ To prevent e-waste and save these from landfills, you may use the procedure here
 > The upload process completes the patching; no upgrade will be offered. Instead you will receive confirmation the patch has successfully completed.  
 > ![](../images/Support_And_Licenses_1031.png)
 
-Although [the patch](../images/zd.licenses.patch) can be directly downloaded and used, I recommend either [creating the patch yourself](../Scripts/create_zd_licenses_patch.sh) or [decrypting the patch](DecryptRuckusBackups.md) to verify it does only what it should.
+Although [the patch](../images/zd.licenses.patch.img) can be directly downloaded and used, I recommend either [creating the patch yourself](../Scripts/create_zd_licenses_patch.sh) or [decrypting the patch](DecryptRuckusBackups.md) to verify it does only what it should.
