@@ -1,6 +1,6 @@
 # Bypassing the Country Lock for US model Ruckus AP
 
-Ruckus access points are cheap to buy from the USA.
+Ruckus access points may be cheaper to buy from the USA.
 
 But Ruckus locks the country code on `US` model access points (unlike `WW` models), so you can't use the correct WiFi bands for other countries.
 And `US` model access points will refuse to join any existing Unleashed or ZoneDirector network which doesn't have its country code set to US.
@@ -31,7 +31,16 @@ reboot
 
 Job done.
 
-## Removing the country lock (for pre-2020 AP models)
+## Permanently removing the country lock from an Unleashed AP
+
+[This patch](../images/unleashed.unlock.dbg) should be uploaded as a `Preload Image` (`Admin & Services` > `Administration` > `Upgrade` > `Local Upgrade` > `Preload Image`).  
+> The upload process completes the unlock; no upgrade will be offered. Simply wait a few seconds after the upload, then force-refresh your browser.  
+> ![](../images/Unleashed_Root_Shell.png)  
+> The option to change your country code will now be available at `Admin & Services` > `System` > `Country Code`
+
+Although [the patch](../images/unleashed.unlock.dbg) can be directly downloaded and used, I recommend either [creating the patch yourself](../Scripts/create_unleashed_unlock.sh) or [decrypting the patch](DecryptRuckusBackups.md) to verify it does only what it should.
+
+## Manually removing the country lock (for pre-2020 AP models)
 
 ### 1) Obtain a root shell
 
