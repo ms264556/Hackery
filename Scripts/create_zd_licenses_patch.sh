@@ -98,7 +98,7 @@ echo "Added AP Licenses.\n<br />"
 END
 
 chmod +x upgrade_check.sh
-rm -f zd.patch.tar zd.patch.tar.gz
+rm -f zd.patch.tgz
 tar czf zd.patch.tgz metadata all_files upgrade_check.sh
 rks_encrypt zd.patch.tgz zd.licenses.patch.img
 rm all_files metadata upgrade_check.sh zd.patch.tgz
