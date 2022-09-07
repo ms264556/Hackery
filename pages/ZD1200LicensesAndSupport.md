@@ -2,7 +2,7 @@
 
 To prevent e-waste and save these from landfills, you may use the procedure here to enable upgrades and remove the 5 AP limit from your ZoneDirector for use in a homelab or personal environment.
 
->If you have a ZoneDirector 1000 or 5000 then you can still add AP Licenses, but you'll have to (temporarily) install older software.  
+>If you have a ZoneDirector 1000 or 5000 then you can still add AP Licenses.  
 >Follow the instructions here: [Add AP Licenses to a ZoneDirector](ZDAddLicenses.md)
 
 The appropriate patch [[ZD1100](../images/zd1100.licenses.patch.img)/[ZD1200](../images/zd1200.licenses.patch.img)/[ZD3000](../images/zd3000.licenses.patch.img)] should be uploaded as a Software Upgrade (`Administer` > `Upgrade` > `Software Upgrade`).  
