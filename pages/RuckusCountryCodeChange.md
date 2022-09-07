@@ -8,6 +8,15 @@ The country cannot be changed from the Web interface, and if you try to SSH in a
 
 Fortunately, it's possible to bypass the country lock, or even turn a locked `US` AP into an unlocked `WW` AP...
 
+## Permanently removing the country lock from an Unleashed AP
+
+[This patch](../images/unleashed.unlock.dbg) should be uploaded as a `Preload Image` (`Admin & Services` > `Administration` > `Upgrade` > `Local Upgrade` > `Preload Image`).  
+> The upload process completes the unlock; no upgrade will be offered. Simply wait a few seconds after the upload, then force-refresh your browser.  
+> ![](../images/Unleashed_Root_Shell.png)  
+> The option to change your country code will now be available at `Admin & Services` > `System` > `Country Code`
+
+Although [the patch](../images/unleashed.unlock.dbg) can be directly downloaded and used, I recommend either [creating the patch yourself](../Scripts/create_unleashed_unlock.sh) or [decrypting the patch](DecryptRuckusBackups.md) to verify it does only what it should.
+
 ## Changing the locked Country Code
 
 SSH into the AP (using the same credentials you use to log into the web dashboard).
@@ -31,25 +40,12 @@ reboot
 
 Job done.
 
-## Permanently removing the country lock from an Unleashed AP
-
-[This patch](../images/unleashed.unlock.dbg) should be uploaded as a `Preload Image` (`Admin & Services` > `Administration` > `Upgrade` > `Local Upgrade` > `Preload Image`).  
-> The upload process completes the unlock; no upgrade will be offered. Simply wait a few seconds after the upload, then force-refresh your browser.  
-> ![](../images/Unleashed_Root_Shell.png)  
-> The option to change your country code will now be available at `Admin & Services` > `System` > `Country Code`
-
-Although [the patch](../images/unleashed.unlock.dbg) can be directly downloaded and used, I recommend either [creating the patch yourself](../Scripts/create_unleashed_unlock.sh) or [decrypting the patch](DecryptRuckusBackups.md) to verify it does only what it should.
-
-## Manually removing the country lock (for pre-2020 AP models)
+## Manually removing the country lock (for pre-2020 AP models, including non-Unleashed APs)
 
 ### 1) Obtain a root shell
 
 The unlocking procedure requires you to *temporarily* install an older software version.  
 Ensure the installed access point software was released in November 2019 or earlier. Otherwise, download an older version from [https://support.ruckuswireless.com/software](https://support.ruckuswireless.com/software) and do an 'upgrade'.  
-
-> If you can't install firmware because your support has expired, download a 30 day support entitlement file from [https://supportactivation.ruckuswireless.com/](https://supportactivation.ruckuswireless.com/) and upload this to your ZoneDirector.  
-> Alternatively, do a factory reset (_after_ you've backed up your configuration, if you don't want to lose it!). So long as the ZD has internet access then it will grab a 30 day support entitlement.  
-> Now you can upgrade/downgrade your firmware.
 
 SSH into the AP *using the same credentials you use to log into the web dashboard*, then break out to a root shell. There is a different procedure depending on whether or not your AP is running Unleashed software:
 
