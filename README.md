@@ -24,4 +24,4 @@ Just hacks and code snippets which might be useful to someone else.
 
 [Setting up a hotkey to switch between Linux and Windows](pages/InputSwitchHotkey.md)
 
-[Setting up a hotkey to switch PbP Pn/Off](pages/DellPbPSwitch.md)
+[Setting up a hotkey to switch Picture-by-Picture On/Off](pages/DellPbPSwitch.md)
