@@ -12,6 +12,8 @@ Just hacks and code snippets which might be useful to someone else.
 
 [Enable Upgrades and Add Extra AP Licenses to your ZoneDirector for HomeLab Use](pages/ZD1200LicensesAndSupport.md)
 
+[Update the SSH host key algorithm on your Unleashed or ZoneDirector to ECDSA](pages/MakeRuckusSshUseEcdsa.md)
+
 ## Font hackery
 
 [A tweaked Verdana font for Programming (100% or 125% text scaling version)](pages/VerdanaVisualStudio.md)
