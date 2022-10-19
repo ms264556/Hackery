@@ -1,13 +1,13 @@
-# Switch the Ruckus Unleashed/ZoneDirector SSH Host Key Algorithm to ECDSA
+# Change Unleashed/ZoneDirector SSH Host Key Algorithm to ECDSA
 
-Ruckus Unleashed / ZoneDirector use RSA 2048 bit for their SSH host keys.  
-This algorithm is deprecated, so most clients will require you to specify `-oHostKeyAlgorithms=+ssh-rsa` to connect.
+Ruckus Unleashed / ZoneDirector use 2048 bit RSA SSH host keys.  
+This algorithm is deprecated, so most SSH clients will refuse to connect unless you explicitly specify `-oHostKeyAlgorithms=+ssh-rsa` on your `ssh` commandline.
 
-You can tweak things so that Unleashed or ZoneDirector use (non-deprecated) ECDSA instead...
+Sure, you can permanently add `HostKeyAlgorithms +ssh-rsa` to your `~/.ssh/config` file.  
+But you might prefer to tweak your Unleashed or ZoneDirector to use (secure, non-deprecated) ECDSA instead...
 
 ## Unleashed ECDSA SSH Host Key Procedure
-> This only changes the Master AP - you will need to follow the same procedure again if another AP begins acting as Master.  
-> Since the procedure reboots your Master AP, you will probably have an opportunity to do this immediately.
+> This procedure changes only the Master AP - you will need to follow the same procedure again if another AP begins acting as Master.  
 
 [This patch](../images/unleashed.ecdsa.patch.dbg) should be uploaded as a `Preload Image` (`Admin & Services` > `Administration` > `Upgrade` > `Local Upgrade` > `Preload Image`).  
 > The upload process completes the change and reboots your Master AP; no upgrade will be offered.  
