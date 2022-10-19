@@ -10,7 +10,7 @@ But you might prefer to tweak your Unleashed or ZoneDirector to use (secure, non
 > This procedure changes only the Master AP - you will need to follow the same procedure again if another AP begins acting as Master.  
 
 [This patch](../images/unleashed.ecdsa.patch.dbg) should be uploaded as a `Preload Image` (`Admin & Services` > `Administration` > `Upgrade` > `Local Upgrade` > `Preload Image`).  
-> The upload process completes the change and reboots your Master AP; no upgrade will be offered.  
+> The upload process completes the change; no upgrade will be offered.  
 > ![](../images/Unleashed_Root_Shell.png)  
 
 Although [the patch](../images/unleashed.ecdsa.patch.dbg) can be directly downloaded and used, I recommend either [creating the patch yourself](../Scripts/create_unleashed_ecdsa_patch.sh) or [decrypting the patch](DecryptRuckusBackups.md) to verify it does only what it should.
