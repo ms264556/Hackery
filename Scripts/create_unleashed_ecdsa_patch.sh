@@ -29,11 +29,14 @@ with open(input_path, "rb") as input_file:
         output_file.write(structInt8.pack(output_int))
 END
 }
+
 cat <<END >upgrade_tool.sh
 exit 1
 END
 
 cat <<END >upgrade_tool
+cp -f /tmp/unleashed_upgrade/upgrade_tool.sh /tmp/unleashed_upgrade/upgrade_tool
+
 killall dropbear > /dev/null 2>&1
 rm -f /writable/data/dropbear/dropbear_rsa_key > /dev/null 2>&1
 
@@ -41,9 +44,8 @@ dropbearkey -t ecdsa -f /writable/data/dropbear/dropbear_rsa_key > /dev/null 2>&
 dropbearkey -y -f /writable/data/dropbear/dropbear_rsa_key | sed -e'1 d' -e'3 d' > /writable/data/dropbear/dropbear_rsa_key.pub
 dropbearkey -y -f /writable/data/dropbear/dropbear_rsa_key | sed -e'1,2 d' -e's/.* .* \(.*\)/\1/' > /writable/data/dropbear/dropbear_rsa_key.md5.fingerprint
 
-# Ideally we'd just restart dropbear. Doesn't seem to work though (we get into an endless loop), so just reboot for now until I have time to investigate
-# /usr/sbin/dropbear -e /var/run/-login -I 900 -p 22 -r /writable/data/dropbear/dropbear_rsa_key -j -k -A none
-reboot
+/usr/sbin/dropbear -e /var/run/-login -I 900 -p 22 -r /writable/data/dropbear/dropbear_rsa_key -j -k -A none
+
 echo Patched ECDSA
 exit 1
 END
@@ -53,5 +55,5 @@ cp upgrade_tool.sh upgrade_download_tool.sh
 
 rm -f unleashed.patch.tgz
 tar czf unleashed.patch.tgz upgrade_tool upgrade_tool.sh upgrade_download_tool.sh
-rks_encrypt unleashed.patch.tgz "$1"
+rks_encrypt unleashed.patch.tgz unleashed.ecdsa.patch.dbg
 rm unleashed.patch.tgz upgrade_tool upgrade_tool.sh upgrade_download_tool.sh
