@@ -8,7 +8,7 @@ The country cannot be changed from the Web interface, and if you try to SSH in a
 
 Fortunately, it's possible to bypass the country lock, or even turn a locked `US` AP into an unlocked `WW` AP...
 
-## Permanently removing the country lock from an Unleashed AP
+## Option 1: Permanently removing the country lock from an Unleashed AP
 
 [This patch](../images/unleashed.unlock.dbg) should be uploaded as a `Preload Image` (`Admin & Services` > `Administration` > `Upgrade` > `Local Upgrade` > `Preload Image`).  
 > The upload process completes the unlock; no upgrade will be offered. Simply wait a few seconds after the upload, then force-refresh your browser.  
@@ -17,7 +17,7 @@ Fortunately, it's possible to bypass the country lock, or even turn a locked `US
 
 Although [the patch](../images/unleashed.unlock.dbg) can be directly downloaded and used, I recommend either [creating the patch yourself](../Scripts/create_unleashed_unlock.sh) or [decrypting the patch](DecryptRuckusBackups.md) to verify it does only what it should.
 
-## Changing the locked Country Code
+## Option 2: Changing the locked Country Code
 
 SSH into the AP (using the same credentials you use to log into the web dashboard).
 
@@ -40,7 +40,7 @@ reboot
 
 Job done.
 
-## Manually removing the country lock (for pre-2020 AP models, including non-Unleashed APs)
+## Option 3: Manually removing the country lock (for pre-2020 AP models, including non-Unleashed APs)
 
 ### 1) Obtain a root shell
 
