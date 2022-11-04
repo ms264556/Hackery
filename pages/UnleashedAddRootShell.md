@@ -1,7 +1,7 @@
-# Add a Root Shell to your Ruckus Unleashed network
+# Add a Root Shell to Ruckus Unleashed
 
 Until late 2019 you could escape from the Ruckus CLI to a root shell.  
-You can add this functionality back to your Unleashed network, if you'd find it useful.  
+You can add this functionality back to your Unleashed AP, if you'd find it useful.  
 
 [This patch](../images/unleashed.root.patch.dbg) should be uploaded as a `Preload Image` (`Admin & Services` > `Administration` > `Upgrade` > `Local Upgrade` > `Preload Image`).  
 > The upload process completes the patching; no upgrade will be offered. Simply wait a few seconds after the upload, and the root shell will be available.
