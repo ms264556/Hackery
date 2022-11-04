@@ -1,6 +1,6 @@
 # Add AP Licenses and Upgrade Entitlement to a ZoneDirector 1100/1200/3000
 
-To prevent e-waste and save these from landfills, you may use the procedure here to enable upgrades and remove the 5 AP limit from your ZoneDirector for use in a homelab or personal environment.
+To prevent e-waste and save these from landfills, you may use the procedure here to enable upgrades, enable url filtering and remove the 5 AP limit from your ZoneDirector for use in a homelab or personal environment.
 
 >If you have a ZoneDirector 1000 or 5000 then you can still add AP Licenses.  
 >Follow the instructions here: [Add AP Licenses to a ZoneDirector](ZDAddLicenses.md)
