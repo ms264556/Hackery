@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Create an Unleashed Upgrade Preload Image which converts a locked US AP to an unlocked WW AP.
-
 function rks_encrypt {
 RUCKUS_SRC="$1" RUCKUS_DEST="$2" python3 - <<END
 import os
@@ -39,10 +37,14 @@ END
 cat <<END >upgrade_tool
 cp -f /tmp/unleashed_upgrade/upgrade_tool.sh /tmp/unleashed_upgrade/upgrade_tool
 
-bsp set fixed_ctry_code 0
-bsp commit
+cat <<EOF >/etc/airespider-images/license-list.xml
+<license-list name="128 AP Management" max-ap="128" max-client="2048" value="0x0000000f" urlfiltering-ap-license="128" is_url="1" detail="" is-clean="true">
+    <license id="1" name="URL Filtering License" feature-id="38" ap-num="128" generated-by="264556" serial-number="\`cfg system.unleashed-network.unleashed-network-token | cut -d" " -f 2\`" end-time="1819731540" start-time="`date +%s`" status="0" detail="" />
+</license-list>
+EOF
+cat /etc/airespider-images/license-list.xml > /etc/airespider/license-list.xml
 
-echo Unlocked Country Code
+echo Added URL Filtering License
 exit 1
 END
 chmod +x upgrade_tool
@@ -51,5 +53,5 @@ cp upgrade_tool.sh upgrade_download_tool.sh
 
 rm -f unleashed.patch.tgz
 tar czf unleashed.patch.tgz upgrade_tool upgrade_tool.sh upgrade_download_tool.sh
-rks_encrypt unleashed.patch.tgz unleashed.unlock.dbg
+rks_encrypt unleashed.patch.tgz unleashed.url_filtering_license.patch.dbg
 rm unleashed.patch.tgz upgrade_tool upgrade_tool.sh upgrade_download_tool.sh
