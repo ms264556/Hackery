@@ -2,9 +2,13 @@
 
 To prevent e-waste and save these from landfills, you may use the procedure here to enable upgrades, enable URL filtering and remove the 5 AP limit from your ZoneDirector for use in a homelab or personal environment.
 
-The appropriate patch [[ZD1100](../images/zd1100.licenses.patch.img)/[ZD1200](../images/zd1200.licenses.patch.img)/[ZD3000](../images/zd3000.licenses.patch.img)] should be uploaded as a Software Upgrade (`Administer` > `Upgrade` > `Software Upgrade`).  
-> The upload process completes the patching; no upgrade will be offered. Instead you will receive confirmation the patch has successfully completed.  
-> ![](../images/Support_And_Licenses_1031.png)
+The appropriate patch [[ZD1100](../images/zd1100.licenses.patch.img)/[ZD1200](../images/zd1200.licenses.patch.img)/[ZD3000](../images/zd3000.licenses.patch.img)] should be uploaded as a Software Upgrade (`Administer` > `Upgrade` > `Software Upgrade`).
+
+The upload process completes the patching; no upgrade will be offered. Instead you will receive confirmation the patch has successfully completed:-
+
+![](../images/Support_And_Licenses_1031.png)
+
+>Subsequent software upgrades will remove the patched support license: you will need to re-apply this patch each time you upgrade your ZoneDirector's software.
 
 Although the above patch can be directly downloaded and used, I recommend either creating the patch yourself [[ZD1100](../Scripts/create_zd1100_licenses_patch.sh)/[ZD1200](../Scripts/create_zd1200_licenses_patch.sh)/[ZD3000](../Scripts/create_zd3000_licenses_patch.sh)] or [decrypting the patch](DecryptRuckusBackups.md) to verify it does only what it should.
 
