@@ -2,7 +2,7 @@
 
 This code works for ZoneDirector & Unleashed backups and debug logs, and also ZoneDirector Software Images.
 
-There is a Windows Powershell/C# version at the bottom of this page.
+There is a faster Windows Powershell/C# version at the bottom of this page.
 
 ## Ruckus Crypt bash Functions (using Python)
 
