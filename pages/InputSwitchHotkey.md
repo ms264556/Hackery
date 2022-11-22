@@ -3,7 +3,7 @@
 ## Windows PC
 ### 1) Install Dell Display Manager (DDM)
 Currently here:
-* [https://dl.dell.com/FOLDER08877637M/1/ddmsetup2107.exe?fn=ddmsetup2107.exe](https://dl.dell.com/FOLDER08877637M/1/ddmsetup2107.exe?fn=ddmsetup2107.exe)
+* [https://dl.dell.com/FOLDER09052092M/1/ddmsetup.exe](https://dl.dell.com/FOLDER09052092M/1/ddmsetup.exe)
 
 ### 2) Install DDM Hotkey Manager (DDMHKM)
 Currently here:
