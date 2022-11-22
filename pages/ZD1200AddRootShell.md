@@ -4,10 +4,14 @@ Until late 2019 you could escape from the Ruckus CLI to a root shell.
 You can add this functionality back to your ZoneDirector, if you'd find it useful.  
 
 [This patch](../images/zd.root.and.licenses.patch.img) should be uploaded as a Software Upgrade (`Administer` > `Upgrade` > `Software Upgrade`).  
-> The upload process completes the patching; no upgrade will be offered. Instead you will be given instructions on using the root shell.
-> ![](../images/Root_Support_APs_1031.png)
+
+The upload process completes the patching; no upgrade will be offered. Instead you will be given instructions on using the root shell:-
+
+![](../images/Root_Support_APs_1031.png)
 
 > The upgrade will also update your AP licensing (150 APs) and Upgrade Entitlement (until August 2027).
+
+>Subsequent software upgrades will disable the root shell and remove the patched support license: you will need to re-apply this patch each time you upgrade your ZoneDirector's software.
 
 In case you miss the instructions, to access the root shell from the CLI:-
 
