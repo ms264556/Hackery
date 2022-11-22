@@ -1,4 +1,4 @@
-# Bypassing the Country Lock for US model Ruckus AP
+# Bypassing the Country Lock for a US model Ruckus AP
 
 Ruckus access points may be cheaper to buy from the USA.
 
