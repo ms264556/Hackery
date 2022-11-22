@@ -1,2 +1,3 @@
 baseurl: "/Hackery"
-theme: jekyll-theme-cayman
+remote_theme: tuur29/pages-themes-cayman
+darkmode: true
