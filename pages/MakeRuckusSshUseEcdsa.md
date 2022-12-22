@@ -1,7 +1,8 @@
 # Change Unleashed / ZoneDirector SSH Host Key Algorithm to ECDSA
 
 Ruckus Unleashed / ZoneDirector use 2048 bit RSA SSH host keys.  
-This algorithm is deprecated, so most SSH clients will refuse to connect unless you explicitly specify `-oHostKeyAlgorithms=+ssh-rsa` on your `ssh` commandline.
+This algorithm is deprecated, so most SSH clients will refuse to connect unless you explicitly specify `-oHostKeyAlgorithms=+ssh-rsa` on your `ssh` commandline.  
+_(If your AP / ZoneDirector is really old, you will need to specify `-oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-rsa`)._
 
 Sure, you can permanently add `HostKeyAlgorithms +ssh-rsa` to your `~/.ssh/config` file.  
 But you might prefer to tweak your Unleashed or ZoneDirector to use (secure, non-deprecated) ECDSA instead...
