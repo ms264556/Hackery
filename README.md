@@ -14,6 +14,8 @@ Just hacks and code snippets which might be useful to someone else.
 
 [Change your Unleashed/ZoneDirector SSH Host Key Algorithm to ECDSA](pages/MakeRuckusSshUseEcdsa.md)
 
+[Turn your old Ruckus AP into a WiFi Bridge or Extender](https://github.com/ms264556/ruckus_ap_firmware_mod)
+
 ## Font hackery
 
 [A tweaked Verdana font for Programming (100% or 125% text scaling version)](pages/VerdanaVisualStudio.md)
