@@ -2,8 +2,9 @@
 
 The Ruckus CLI includes a hidden `!v54!` command which exits to a root shell.  
 
-Very old AP firmware checks a configuration setting `cli_esc2shell_ok` to decide whether the `!v54!` command is available.  
-Newer AP firmware decrypts a provided serial# to check whether the `!v54!` command is available.
+* Very old AP firmware checks a configuration setting `cli_esc2shell_ok` to decide whether the `!v54!` command is available.  
+* Newer AP firmware checks an encrypted serial# to decide whether the `!v54!` command is available.  
+The encrypted serial# is saved to a file using the `Ruckus` command, then the `!v54!` command uses `sesame` to decrypt this file.
 
 ## Firmware >112.1
 
@@ -12,8 +13,8 @@ Sorry, I don't have a method to bypass the serial# check on newer Standalone/Sol
 ## Firmware 9.8 - 112.1
 
 These AP firmware versions [don't sanitize the encrypted serial#](https://alephsecurity.com/vulns/aleph-2019014#proof-of-concept).  
-So we can use the `Ruckus` command to save a serial# which injects a root shell.
-> Note that the command injection only needs to be performed once.
+So we can use the `Ruckus` command to inject a root shell.
+> Note that the injection only needs to be performed once.
 
 ### SSH to the AP
 
