@@ -11,8 +11,8 @@ Sorry, I don't have a method to bypass the serial# check on newer Standalone/Sol
 
 ## Firmware 9.8 - 112.1
 
-These AP firmware versions don't sanitize the encrypted serial# you provide with the `Ruckus` command.  
-[So we can inject a root shell](https://alephsecurity.com/vulns/aleph-2019014#proof-of-concept).
+These AP firmware versions [don't sanitize the encrypted serial#](https://alephsecurity.com/vulns/aleph-2019014#proof-of-concept).  
+So we can use the `Ruckus` command to save a serial# which injects a root shell.
 > Note that the command injection only needs to be performed once.
 
 ### SSH to the AP
@@ -57,7 +57,7 @@ You have a root shell.
 
 ## Firmware Pre-9.8
 
-These AP firmware versions [don't sanitize the input to the](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-6230) `Ping` [diagnostic tool](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-6230).  
+These AP firmware versions [don't sanitize the input to the Ping diagnostic tool](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-6230).  
 So we can use `Ping` to enable `cli_esc2shell_ok`.
 > Note that the `Ping` enablement only needs to be performed once.
 
