@@ -48,10 +48,10 @@ What's your chow:
 Now hit enter
 
 ```console
-Ruckus Wireless ZoneDirector -- Command Line Interface
+BusyBox v1.15.2 (2015-07-21 22:07:19 PDT) built-in shell (ash)
 Enter 'help' for a list of built-in commands.
 
-ruckus$
+#
 ```
 
 You have a root shell.
@@ -88,10 +88,10 @@ What's your chow:
 Now hit enter
 
 ```console
-Ruckus Wireless ZoneDirector -- Command Line Interface
+BusyBox v1.15.2 (2015-07-21 22:07:19 PDT) built-in shell (ash)
 Enter 'help' for a list of built-in commands.
 
-ruckus$
+#
 ```
 
 You have a root shell.
