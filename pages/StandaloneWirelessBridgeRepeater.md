@@ -49,5 +49,5 @@ Your AP will now reboot, and associate to the WLAN you specified in step 2.
 > You won't be able to choose the 5Ghz channel anymore. The AP will use the uplink's channel.
 
 > You can choose a different WLAN to convert, if you're already using Wireless16 for something else.  
-> Just tweak the script, changing `wlan15` to whichever of `wlan0` - `wlan14` is free.
+> Just tweak the script, changing `wlan15` to whichever of `wlan0` - `wlan14` is free. If you choose a 2.4Ghz WLAN then also change `wlan-if-parent` to `0`.
 > 
