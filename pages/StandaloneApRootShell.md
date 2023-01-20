@@ -1,9 +1,9 @@
 # Obtaining a root shell on Standalone/Solo Ruckus APs
 
-The Ruckus CLI includes an unlisted `!v54!` command which exits to a root shell.  
+The Ruckus CLI includes a hidden `!v54!` command which exits to a root shell.  
 
-Very old AP firmware checks a configuration flag `cli_esc2shell_ok` to decide whether the `!v54!` command is available.  
-Newer AP firmware decrypts a saved serial# to check whether the `!v54!` command is available. The `Ruckus` command is used to save the encrypted serial#.
+Very old AP firmware checks a configuration setting `cli_esc2shell_ok` to decide whether the `!v54!` command is available.  
+Newer AP firmware decrypts a provided serial# to check whether the `!v54!` command is available.
 
 ## Firmware >112.1
 
@@ -11,8 +11,8 @@ Sorry, I don't have a method to bypass the serial# check on newer Standalone/Sol
 
 ## Firmware 9.8 - 112.1
 
-These AP firmware versions don't sanitize the serial# you provide with the `Ruckus` command.  
-So we can inject a root shell.
+These AP firmware versions don't sanitize the encrypted serial# you provide with the `Ruckus` command.  
+[So we can inject a root shell](https://alephsecurity.com/vulns/aleph-2019014#proof-of-concept).
 > Note that the command injection only needs to be performed once.
 
 ### SSH to the AP
@@ -57,17 +57,17 @@ You have a root shell.
 
 ## Firmware Pre-9.8
 
-These AP firmware versions don't sanitize the input to the `Ping` diagnostic tool.
+These AP firmware versions [don't sanitize the input to the](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-6230) `Ping` [diagnostic tool](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-6230).  
 So we can use `Ping` to enable `cli_esc2shell_ok`.
 > Note that the `Ping` enablement only needs to be performed once.
-
-### Enable shell escape
-
-Go to `Administration` > `Diagnostics`, paste `|rpm${IFS}-p${IFS}cli_esc2shell_ok="t"` into the `Ping:` textbox & hit `Run test`.
 
 ### Connect to the AP's Web UI
 
 Login. Default username is "super", password is "sp-admin".
+
+### Enable shell escape
+
+Go to `Administration` > `Diagnostics`, paste `|rpm${IFS}-p${IFS}cli_esc2shell_ok="t"` into the `Ping:` textbox & hit `Run test`.
 
 ### SSH to the AP
 
