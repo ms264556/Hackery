@@ -1,5 +1,10 @@
 # Enable Wireless Uplink on Solo/Standalone Ruckus APs
 
+You can use the procedure below to bridge your AP to an existing WiFi network.
+
+This may be useful if you have wired-only devices (e.g. printers or SIP phones) but can't easily run an ethernet drop.  
+Or maybe your router's WiFi signal is weak & it has no user-accessible ethernet ports (e.g. an LTE travel router or a phone hotspot).  
+
 ## Step 1: Obtain a root shell
 
 [Follow the instruction here](StandaloneApRootShell.md) to escape from the Ruckus CLI to a root shell.
