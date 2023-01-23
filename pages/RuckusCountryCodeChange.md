@@ -115,9 +115,5 @@ Performing Flash Erase of length 262144 at offset 0x0 done
   verifying flash data [0x00008000 - 0x000080d0] from [0x7f8cdd04 - 0x7f8cddd4]
 ... Changes saved to flash
 ```
-Now reboot:
-```console
-# reboot
-```
 
 Your Access Point is now permanently unlocked. You can safely upgrade to any newer/older version of the software.
