@@ -99,12 +99,10 @@ ruckus$
 ### 2) Remove the Country Lock
 
 ```console
-# bsp set fixed_ctry_code 0
-# bsp commit
+# rbd country 0
 ```
 Should see something like this:
 ```console
-Saving flash .....
 bdSave: sizeof(bd)=0x7c, sizeof(rbd)=0xd0
   caching flash data from /dev/mtd8 [ 0x00000000 - 0x00010000 ]
   updating flash data [0x00000000 - 0x0000007c] from [0x7f8cdc88 - 0x7f8cdd04]
