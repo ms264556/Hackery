@@ -5,49 +5,44 @@ You can use the procedure below to bridge your AP to an existing WiFi network.
 This may be useful if you have wired-only devices (e.g. printers or SIP phones) but can't easily run an ethernet drop.  
 Or maybe your router's WiFi signal is weak & it has no user-accessible ethernet ports (e.g. an LTE travel router or a phone hotspot).  
 
-## Step 1: Obtain a root shell
+### Step 1: SSH to the AP
 
-[Follow the instruction here](StandaloneApRootShell.md) to escape from the Ruckus CLI to a root shell.
-
-## Step 2: Enter the SSID and Passphrase of your uplink WLAN
-
-```bash
-MY_UPLINK_SSID="my_uplink_ssid"
-MY_UPLINK_PASS="my_uplink_passphrase"
+```console
+$ ssh 192.168.0.1 -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-rsa
 ```
 
-## Step 3: Convert WLAN "Wireless16" into an uplink
+> 192.168.0.1 is the default IP address, unless the AP was able to lease another IP from a DHCP server.
 
-```bash
-mkdir -p /tmp/wirelessuplink/wlans/wlan15
-cd /tmp/wirelessuplink/wlans/wlan15
+Login.
 
-echo -n 0 >wlan-auth-type
-echo 2 >wlan-cipher-type
-echo 1 >wlan-created-defined
-echo 1 >wlan-encrypt-state
-echo -n 1 >wlan-encrypt-type
-echo -n 1 >wlan-if-flags
-echo -n 1 >wlan-if-parent
-echo -n 1 >wlan-init-noup
-echo allow >wlan-isallowed
-echo ${MY_UPLINK_SSID} >wlan-ssid
-echo -n up >wlan-state
-echo sta >wlan-type
-echo Wireless Bridge >wlan-userdef-text
-echo -n ${MY_UPLINK_PASS} >wlan-wpa-passphrase
-echo -n 2 >wlan-wpa-type
+> Default username is "super", password is "sp-admin".
 
-rpm -d wlans/wlan15/*
-rpm -m /tmp/wirelessuplink
+### Step 2: Convert WLAN "Wireless16" into an uplink
 
+Paste the following into the AP's CLI.
+
+> NOTE: you will need to modify the last two `set rpmkey` commands to contain the correct uplink SSID and passphrase for your environment.
+
+```
+set rpmkey wlans/wlan15/wlan-cipher-type 2
+set rpmkey wlans/wlan15/wlan-encrypt-state 1
+set rpmkey wlans/wlan15/wlan-encrypt-type 1
+set rpmkey wlans/wlan15/wlan-if-flags 1
+set rpmkey wlans/wlan15/wlan-init-noup 1
+set rpmkey wlans/wlan15/wlan-userdef-text WirelessBridge
+set rpmkey wlans/wlan15/wlan-wpa-type 2
+set rpmkey wlans/wlan15/wlan-wpa-eap-enable 0
+set rpmkey wlans/wlan15/wlan-type sta
+set rpmkey wlans/wlan15/wlan-state up
+set rpmkey wlans/wlan15/wlan-ssid REPLACE_ME_WITH_YOUR_SSID
+set rpmkey wlans/wlan15/wlan-wpa-passphrase REPLACE_ME_WITH_YOUR_PASSPHRASE
 reboot
 ```
 
 Your AP will now reboot, and associate to the WLAN you specified in step 2.
 
-> You won't be able to choose the 5Ghz channel anymore. The AP will use the uplink's channel.
+> You won't be able to choose which 5Ghz channel is used anymore. The AP will use the uplink's channel for all WLANs.
 
 > You can choose a different WLAN to convert, if you're already using Wireless16 for something else.  
-> Just tweak the script, changing `wlan15` to whichever of `wlan0` - `wlan14` is free. If you choose a 2.4Ghz WLAN then also change `wlan-if-parent` to `0`.
+> Just tweak the script, changing `wlan15` to whichever of `wlan0` - `wlan14` is free.
 > 
