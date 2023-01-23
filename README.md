@@ -14,7 +14,7 @@ Just hacks and code snippets which might be useful to someone else.
 
 [Change your Unleashed/ZoneDirector SSH Host Key Algorithm to ECDSA](pages/MakeRuckusSshUseEcdsa.md)
 
-[Turn your old Ruckus AP into a WiFi Bridge or Extender](pages/StandaloneWirelessBridgeRepeater.md)
+[Turn your Ruckus AP into a WiFi Bridge or Extender](pages/StandaloneWirelessBridgeRepeater.md)
 
 ## Font hackery
 
