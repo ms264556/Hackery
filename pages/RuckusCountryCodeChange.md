@@ -90,10 +90,10 @@ What's your chow:
 Now hit enter twice
 
 ```console
-Ruckus Wireless ZoneDirector -- Command Line Interface
+BusyBox v1.15.2 (2015-07-21 22:07:19 PDT) built-in shell (ash)
 Enter 'help' for a list of built-in commands.
 
-ruckus$
+#
 ```
 
 ### 2) Remove the Country Lock
@@ -113,7 +113,6 @@ Performing Flash Erase of length 262144 at offset 0x0 done
   caching flash data from /dev/mtd8 [ 0x00000000 - 0x00010000 ]
   verifying flash data [0x00000000 - 0x0000007c] from [0x7f8cdc88 - 0x7f8cdd04]
   verifying flash data [0x00008000 - 0x000080d0] from [0x7f8cdd04 - 0x7f8cddd4]
-... Changes saved to flash
 ```
 
 Your Access Point is now permanently unlocked. You can safely upgrade to any newer/older version of the software.
