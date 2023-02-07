@@ -12,11 +12,11 @@ Just hacks and code snippets which might be useful to someone else.
 
 [Enable Upgrades and Add Extra AP Licenses to your ZoneDirector for HomeLab Use](pages/ZD1200LicensesAndSupport.md)
 
-[Change your Unleashed/ZoneDirector SSH Host Key Algorithm to ECDSA](pages/MakeRuckusSshUseEcdsa.md)
+[Fix insecure Unleashed/ZoneDirector SSH Host Key](pages/MakeRuckusSshUseEcdsa.md)
 
-[Turn your Ruckus AP into a WiFi Bridge or Extender](pages/StandaloneWirelessBridgeRepeater.md)
+[Turn your Ruckus AP into a Wireless Bridge or Extender](pages/StandaloneWirelessBridgeRepeater.md)
 
-## Font hackery
+## Font Hackery
 
 [A tweaked Verdana font for Programming (100% or 125% text scaling version)](pages/VerdanaVisualStudio.md)
 
