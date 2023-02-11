@@ -6,7 +6,7 @@ Just hacks and code snippets which might be useful to someone else.
 
 [Change the Country Code on country-locked Ruckus Access Points](pages/RuckusCountryCodeChange.md)
 
-[Let pfSense push Let's Encrypt certificates to your Ruckus Unleashed or ZoneDirector](pages/PfSenseLetsEncryptToRuckus.md)
+[Push Let's Encrypt certificates to your Ruckus Unleashed or ZoneDirector](pages/PfSenseLetsEncryptToRuckus.md)
 
 [Retrieve forgotten passwords from your Unleashed or ZoneDirector backup](pages/ExtractRuckusAdminUserPass.md)
 
