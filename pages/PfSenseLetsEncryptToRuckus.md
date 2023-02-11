@@ -3,7 +3,7 @@
 There's no official API for pushing certificates to Ruckus ZoneDirector or Ruckus Unleashed.  
 This is a pain. Free TLS certificates issued by [Let's Encrypt](https://letsencrypt.org) are only good for 90 days, so automation is key.
 
-You can use the shell script, below, to push certificates to Ruckus Unleashed or ZoneDirector.
+You can use the shell script, below, to push certificates to Ruckus Unleashed or ZoneDirector.  
 The script has been tested on Linux (Ubuntu) & FreeBSD (pfSense).
 
 The script takes 3 arguments:  
@@ -63,7 +63,10 @@ This will reboot the target ZoneDirector/Unleashed, but the Acme service runs at
 * In `Services` / `Acme Certificates` / `General settings`, make sure the `Write Certificates` box is ticked.
 
 * In `Services` / `Acme Certificates` / `Certificates`, edit the certificate you want to use on your Ruckus ZoneDirector/Unleashed.  
-  * Add a `Shell Command` to the `Actions List`: `/usr/local/bin/export_zd_cert.sh /conf/acme/name.of.this.certificate.fullchain /conf/acme/name.of.this.certificate.key zdhost.your.domain.name` .  
+
+* Add a `Shell Command` to the `Actions List`:  
+    `/usr/local/bin/export_zd_cert.sh /conf/acme/name.of.this.certificate.fullchain /conf/acme/name.of.this.certificate.key zdhost.your.domain.name` .  
+    
   > `zdhost.your.domain.name` is whatever fully qualified hostname you're using for your ZoneDirector/Unleashed, and `name.of.this.certificate` is what you entered in the `Name` box for this certificate.
 
 * Ensure that the `Private Key` setting for your certificate is RSA (ECDSA TLS certificates are unsupported on Unleashed and ZoneDirector).  
