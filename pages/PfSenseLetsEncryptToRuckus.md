@@ -7,14 +7,14 @@ You can use the shell script, below, to push certificates to Ruckus Unleashed or
 The script has been tested on Linux (Ubuntu) & FreeBSD (pfSense).
 
 The script takes 3 arguments:  
-1) The path to your certificate/fullchain file.  
-  (for ACME, this is the _cert_name_.crt file, or the _cert_name_.fullchain file).
+  1) The path to your certificate/fullchain file.  
+    (for ACME, this is the _cert_name_.crt file, or the _cert_name_.fullchain file).
   
-2) The path to your private key file.  
-  (for ACME, this is the _cert_name_.key file).
+  2) The path to your private key file.  
+    (for ACME, this is the _cert_name_.key file).
   
-3) The FQDN of your ZoneDirector or Unleashed Master AP.  
-  This is very important, espcially if you use a wildcard certificate: when you visit your ZoneDirector/Unleashed web UI you will be redirected to `https://FQDN/`
+  3) The FQDN of your ZoneDirector or Unleashed Master AP.  
+   This is very important, espcially if you use a wildcard certificate: when you visit your ZoneDirector/Unleashed web UI you will be redirected to `https://FQDN/`
   
 > You need to edit the script to replace `ZD_USERNAME` and `ZD_PASSWORD` with your own ZoneDirector/Unleashed admin username and password.
 
