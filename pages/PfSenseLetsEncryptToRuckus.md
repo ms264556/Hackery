@@ -1,28 +1,32 @@
-# Get pfSense to push Let's Encrypt Certificates to your Ruckus ZoneDirector or Unleashed AP.
+# Push TLS Certificates to Ruckus ZoneDirector or Unleashed
 
-There's no official API for the Ruckus ZoneDirector or Ruckus Unleashed. And the CLI doesn't provide a way to upload HTTPS certificates.
+There's no official API for pushing certificates to Ruckus ZoneDirector or Ruckus Unleashed.  
+This is a pain. Free TLS certificates issued by [Let's Encrypt](https://letsencrypt.org) are only good for 90 days, so automation is key.
 
-This is a pain. Certificates issued by letsencrypt.org are only good for 90 days, so automation is key.
+You can use the shell script, below, to push certificates to Ruckus Unleashed or ZoneDirector.
+The script has been tested on Linux (Ubuntu) & FreeBSD (pfSense).
 
-If you've got the Acme service setup in pfSense then you can push Let's Encrypt certificates onto your ZoneDirector/Unleashed whenever they come in.
-This will reboot the target ZoneDirector/Unleashed, but the Acme service runs at 3:16am so probably no big issue.
-> Be aware that older Unleashed APs (e.g. R500 or R600) may take 10 minutes to reboot completely.
+The script takes 3 arguments:  
+1) The path to your certificate/fullchain file.  
+  (for ACME, this is the _cert_name_.crt file, or the _cert_name_.fullchain file).
+2) The path to your private key file.  
+  (for ACME, this is the _cert_name_.key file).
+3) The FQDN of your ZoneDirector or Unleashed Master AP.  
+  This is very important, espcially if you use a wildcard certificate: when you visit your ZoneDirector/Unleashed web UI you will be redirected to `https://FQDN/`
+  
+> You need to edit the script to replace `ZD_USERNAME` and `ZD_PASSWORD` with your own ZoneDirector/Unleashed admin username and password.
 
-
-### Create the Script
-
-* Use `Diagnostics` / `Edit File` to create a new file `/usr/local/bin/export_zd_cert.sh` :-
+> The script expects to be able to find your ZoneDirector/Unleashed at the specified fully qualified domain name. So make sure you have already setup split DNS, if necessary.
 
 ```sh
-ZD_USERNAME='ruckususer'
-ZD_PASSWORD='ruckuspassword'
+ZD_USERNAME='myruckususername'
+ZD_PASSWORD='myruckuspassword'
 
 ZD_CERTIFICATE=$1
-ZD_FQDN=$2
+ZD_KEY=$2
+ZD_FQDN=$3
 
-ZD_COOKIE="/tmp/zonedirectorlogincookie.txt"
-
-cd /conf/acme
+ZD_COOKIE=$(mktemp)
 
 ZD_LOGIN_URL="$(curl https://$ZD_FQDN -k -s -L -I -o /dev/null -w '%{url_effective}')"
 LOGIN_ARGS="-k -c $ZD_COOKIE"
@@ -36,18 +40,33 @@ ZD_CMD="$CONF_ARGS $ZD_BASE_URL/_cmdstat.jsp"
 REPLACE_CERT_AJAX="<ajax-request action=\"docmd\" comp=\"system\" updater=\"rid.0.5\" xcmd=\"replace-cert\" checkAbility=\"6\" timeout=\"-1\"><xcmd cmd=\"replace-cert\" cn=\"$ZD_FQDN\"/></ajax-request>"
 CERT_REBOOT_AJAX="<ajax-request action=\"docmd\" comp=\"worker\" updater=\"rid.0.5\" xcmd=\"cert-reboot\" checkAbility=\"6\"><xcmd cmd=\"cert-reboot\" action=\"undefined\"/></ajax-request>"
 
-curl $ZD_UPLOAD -H "X-CSRF-Token: $ZD_XSS" -F u=@$ZD_CERTIFICATE.crt -F action=uploadcert -F callback=uploader_uploadcert
-curl $ZD_UPLOAD -H "X-CSRF-Token: $ZD_XSS" -F u=@$ZD_CERTIFICATE.key -F action=uploadprivatekey -F callback=uploader_uploadprivatekey
+curl $ZD_UPLOAD -H "X-CSRF-Token: $ZD_XSS" -F "u=@$ZD_CERTIFICATE" -F action=uploadcert -F callback=uploader_uploadcert
+curl $ZD_UPLOAD -H "X-CSRF-Token: $ZD_XSS" -F "u=@$ZD_KEY" -F action=uploadprivatekey -F callback=uploader_uploadprivatekey
 curl $ZD_CMD -H "X-CSRF-Token: $ZD_XSS" --data-raw "$REPLACE_CERT_AJAX"
 curl $ZD_CMD -H "X-CSRF-Token: $ZD_XSS" --data-raw "$CERT_REBOOT_AJAX"
+
+rm $ZD_COOKIE
 ```
+
+## Example: Automatically push Let's Encrypt Certificate from pfSense to Unleashed or ZoneDirector
+
+If you've got the Acme service setup in pfSense then you can push Let's Encrypt certificates onto your ZoneDirector/Unleashed whenever they come in.
+This will reboot the target ZoneDirector/Unleashed, but the Acme service runs at 3:16am so probably no big issue.
+> Be aware that older Unleashed APs (e.g. R500 or R600) may take 10 minutes to reboot completely.
+
+### Create the Script
+
+* Use `Diagnostics` / `Edit File` to create a new file `/usr/local/bin/export_zd_cert.sh`, containing the above script.
 
 ### Ask the Acme Service to run the script after renewing your certificate
 
 * In `Services` / `Acme Certificates` / `General settings`, make sure the `Write Certificates` box is ticked.
-* In `Services` / `Acme Certificates` / `Certificates`, edit the certificate you want to use on your Ruckus ZoneDirector/Unleashed. Add a `Shell Command` to the `Actions List`: `/usr/local/bin/export_zd_cert.sh name.of.this.certificate zdhost.your.domain.name` .
-> `zdhost.your.domain.name` is whatever fully qualified hostname you're using for your ZoneDirector/Unleashed, and `name.of.this.certificate` is what you entered in the `Name` box for this certificate.
-* Check that the `Private Key` setting for your certificate is RSA (ECDSA is unsupported on Unleashed and ZoneDirector).
+
+* In `Services` / `Acme Certificates` / `Certificates`, edit the certificate you want to use on your Ruckus ZoneDirector/Unleashed.  
+  * Add a `Shell Command` to the `Actions List`: `/usr/local/bin/export_zd_cert.sh /conf/acme/name.of.this.certificate.fullchain /conf/acme/name.of.this.certificate.key zdhost.your.domain.name` .  
+  > `zdhost.your.domain.name` is whatever fully qualified hostname you're using for your ZoneDirector/Unleashed, and `name.of.this.certificate` is what you entered in the `Name` box for this certificate.
+
+* Ensure that the `Private Key` setting for your certificate is RSA (ECDSA TLS certificates are unsupported on Unleashed and ZoneDirector).  
 
 ### (Optionally) Add a DNS Host Override
 
