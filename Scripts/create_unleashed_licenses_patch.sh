@@ -37,13 +37,11 @@ END
 cat <<END >upgrade_tool
 cp -f /tmp/unleashed_upgrade/upgrade_tool.sh /tmp/unleashed_upgrade/upgrade_tool
 
+rm /etc/airespider/license-list.xml
 cat <<EOF >/etc/airespider/license-list.xml
 <license-list name="128 AP Management" max-ap="128" max-client="2048" value="0x0000000f" urlfiltering-ap-license="128" is_temporal="true" is_url="1">
     <license id="1" name="URL Filtering Temporal License" feature-id="38" ap-num="128" generated-by="URL Filtering Temporal license" serial-number="\`cfg system.unleashed-network.unleashed-network-token | cut -d" " -f 2\`" end-time="1819713600" start-time="1661947200" countdown="157766400" status="0" detail="This license is available for 1826 days." />
 </license-list>
-EOF
-cat <<EOF >/etc/airespider-images/license-list.xml
-<license-list name="128 AP Management" max-ap="128" max-client="2048" value="0x0000000f" urlfiltering-ap-license="0" />
 EOF
 
 echo Added URL Filtering License
