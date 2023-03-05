@@ -15,7 +15,8 @@ Fortunately, it's possible to bypass the country lock, or even turn a locked `US
 > ![](../images/Unleashed_Root_Shell.png)  
 > The option to change your country code will now be available at `Admin & Services` > `System` > `Country Code`
 
-Although [the patch](../images/unleashed.unlock.dbg) can be directly downloaded and used, I recommend either [creating the patch yourself](../Scripts/create_unleashed_unlock.sh) or [decrypting the patch](DecryptRuckusBackups.md) to verify it does only what it should.
+You can, if you wish, [create the patch yourself](../Scripts/create_unleashed_unlock.sh).
+Alternatively, you can [decrypt the patch](DecryptRuckusBackups.md)  to verify it's only doing what it should.
 
 ## Option 2: Changing the locked Country Code
 
