@@ -37,8 +37,9 @@ PURPOSE=upgrade
 VERSION=9.99.99.99
 BUILD=999
 REQUIRE_SIZE=1000
-REQUIRE_VERSIONS=9.1.0.0 9.1.1.0 9.1.2.0 9.3.0.0 9.3.1.0 9.3.2.0 9.3.4.0 9.4.0.0 9.4.2.0 9.4.3.0 9.5.1.0 9.5.2.0 9.5.3.0 9.6.0.0 9.6.1.0 9.6.2.0 9.7.0.0 9.7.1.0 9.7.2.0 9.8.0.0 9.8.1.0 9.8.2.0 9.8.3.0 9.9.0.0 9.9.1.0 9.10.0.0 9.10.1.0 9.10.2.0
-REQUIRE_PLATFORM=ar7161
+REQUIRE_VERSIONS=8.2.0.0 8.4.0.0 9.1.0.0 9.1.0.3 9.1.1.0 9.1.2.0 9.2.0.0 9.3.0.0 9.3.1.0 9.3.2.0 9.3.4.0 9.4.0.0 9.4.2.0 9.4.3.0 9.5.1.0 9.5.2.0 9.5.3.0 9.6.0.0 9.6.1.0 9.6.2.0 9.7.0.0 9.7.1.0 9.7.2.0 9.8.0.0 9.8.1.0 9.8.2.0 9.8.3.0 9.9.0.0 9.9.1.0 9.10.0.0 9.10.1.0 9.10.2.0
+REQUIRE_PLATFORM=ar7100
+ABILITY=ZD5000 
 END
 
 cat <<END >all_files
@@ -48,52 +49,18 @@ END
 cat <<END >upgrade_check.sh
 #!/bin/sh
 
-CUR_WRAP_MD5=\`md5sum /bin/sys_wrapper.sh | cut -d' ' -f1\`
-
 mount -o remount,rw /
-
-cd /etc/persistent-scripts
-mkdir -p patch-storage
-cd patch-storage
-
-if [ -f sys_wrapper.sh ] ; then
-    cat sys_wrapper.sh > /bin/sys_wrapper.sh
-else
-    cat /bin/sys_wrapper.sh > sys_wrapper.sh
-fi
-cat <<EOF >support
-<support-list>
-	<support zd-serial-number="\`cat /bin/SERIAL\`" service-purchased="904" date-start="`date +%s`" date-end="1835369940" ap-support-number="licensed" DELETABLE="false"></support>
-</support-list>
-EOF
-sed 's/<support-list/<support-list status="1"/' support >/writable/etc/airespider/support-list.xml
-rm -f support.spt
-tar -czf support.spt support
 
 cat <<EOF >/etc/airespider-images/license-list.xml
 <license-list name="50 AP Management" max-ap="50" max-client="1250" value="0x0000000f" />
 </license-list>
 EOF
 
-sed -i -e '/verify-upload-support)/a \\
-        cd \/tmp\\
-        cat \/etc\/persistent-scripts\/patch-storage\/support > support\\
-        echo "OK"\\
-        ;;\\
-    verify-upload-support-unpatched)' -e '/wget-support-entitlement)/a \\
-        cat \/etc\/persistent-scripts\/patch-storage\/support\.spt > "\/tmp\/\$1"\\
-        echo "OK"\\
-        ;;\\
-    wget-support-entitlement-unpatched)' /bin/sys_wrapper.sh
-NEW_WRAP_MD5=\`md5sum /bin/sys_wrapper.sh | cut -d' ' -f1\`
-sed -i -e "s/\$CUR_WRAP_MD5/\$NEW_WRAP_MD5/" /file_list.txt
-
-bsp set model ZD1150 > /dev/null 2>&1
+bsp set model ZD1050 > /dev/null 2>&1
 bsp commit > /dev/null 2>&1
 
 mount -o remount,ro /
 
-echo "Added Upgrade Entitlement.\n<br />"
 echo "Added AP Licenses.\n<br />"
 
 END
@@ -101,5 +68,5 @@ END
 chmod +x upgrade_check.sh
 rm -f zd.patch.tgz
 tar czf zd.patch.tgz metadata all_files upgrade_check.sh
-rks_encrypt zd.patch.tgz zd1100.licenses.patch.img
+rks_encrypt zd.patch.tgz zd1000.licenses.patch.img
 rm all_files metadata upgrade_check.sh zd.patch.tgz

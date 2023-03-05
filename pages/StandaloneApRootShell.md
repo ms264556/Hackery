@@ -19,7 +19,7 @@ So we can use the `Ruckus` command to inject a root shell.
 ### SSH to the AP
 
 ```console
-$ ssh 192.168.0.1 -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-rsa
+$ ssh 192.168.0.1 -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-rsa -oCiphers=+aes256
 ```
 
 Login. Default username is "super", password is "sp-admin".
@@ -73,7 +73,7 @@ Go to `Administration` > `Diagnostics`, paste `|rpm${IFS}-p${IFS}cli_esc2shell_o
 ### SSH to the AP
 
 ```console
-$ ssh 192.168.0.1 -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-rsa
+$ ssh 192.168.0.1 -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-rsa -oCiphers=+aes256
 ```
 
 Login. Default username is "super", password is "sp-admin".

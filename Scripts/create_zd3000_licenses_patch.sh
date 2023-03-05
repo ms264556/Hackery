@@ -65,7 +65,7 @@ else
 fi
 cat <<EOF >support
 <support-list>
-	<support zd-serial-number="\`cat /bin/SERIAL\`" service-purchased="904" date-start="`date +%s`" date-end="1819731540" ap-support-number="licensed" DELETABLE="false"></support>
+	<support zd-serial-number="\`cat /bin/SERIAL\`" service-purchased="904" date-start="`date +%s`" date-end="1835369940" ap-support-number="licensed" DELETABLE="false"></support>
 </support-list>
 EOF
 sed 's/<support-list/<support-list status="1"/' support >/writable/etc/airespider/support-list.xml
@@ -73,9 +73,9 @@ rm -f support.spt
 tar -czf support.spt support
 
 cat <<EOF >/etc/airespider-images/license-list.xml
-<license-list name="150 AP Management" max-ap="150" max-client="4000" value="0x0000000f" urlfiltering-ap-license="150" is_url="1" is-clean="true">
-    <license id="1" name="145 AP Management" inc-ap="145" generated-by="264556" serial-number="\`cat /bin/SERIAL\`" status="0" detail="" />
-    <license id="2" name="URL Filtering License" feature-id="38" ap-num="150" generated-by="264556" serial-number="\`cat /bin/SERIAL\`" end-time="1819731540" start-time="`date +%s`" status="0" detail="" />
+<license-list name="450 AP Management" max-ap="450" max-client="8000" value="0x0000000f" urlfiltering-ap-license="450" is_url="1" is-clean="true">
+    <license id="1" name="400 AP Management" inc-ap="400" generated-by="264556" serial-number="\`cat /bin/SERIAL\`" status="0" detail="" />
+    <license id="2" name="URL Filtering License" feature-id="38" ap-num="450" generated-by="264556" serial-number="\`cat /bin/SERIAL\`" end-time="1835369940" start-time="`date +%s`" status="0" detail="" />
 </license-list>
 EOF
 cat /etc/airespider-images/license-list.xml > /etc/airespider/license-list.xml
@@ -92,6 +92,9 @@ sed -i -e '/verify-upload-support)/a \\
     wget-support-entitlement-unpatched)' /bin/sys_wrapper.sh
 NEW_WRAP_MD5=\`md5sum /bin/sys_wrapper.sh | cut -d' ' -f1\`
 sed -i -e "s/\$CUR_WRAP_MD5/\$NEW_WRAP_MD5/" /file_list.txt
+
+bsp set model ZD3050 > /dev/null 2>&1
+bsp commit > /dev/null 2>&1
 
 mount -o remount,ro /
 
