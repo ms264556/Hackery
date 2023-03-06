@@ -5,7 +5,7 @@
 The procedure below permanently adds a root shell command to your ZoneDirector CLI.  
 If you prefer a temporary, one-time use, root shell then [follow the instructions here](ZD1200AddOneTimeRootShell.md).
 
-[This patch](../images/zd.root.and.licenses.patch.img) should be uploaded as a Software Upgrade (`Administer` > `Upgrade` > `Software Upgrade`).  
+[This patch](../images/zd1200.rootshell.patch.img) should be uploaded as a Software Upgrade (`Administer` > `Upgrade` > `Software Upgrade`).  
 
 The upload process completes the patching; no upgrade will be offered. Instead you will be given instructions on using the root shell:-
 
