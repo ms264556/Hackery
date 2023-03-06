@@ -8,7 +8,7 @@ Or maybe your router's WiFi signal is weak & it has no user-accessible ethernet 
 ### Step 1: SSH to the AP
 
 ```console
-$ ssh 192.168.0.1 -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-rsa -oCiphers=+aes256
+$ ssh 192.168.0.1 -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-rsa -oCiphers=+aes256-cbc
 ```
 
 > 192.168.0.1 is the default IP address, unless the AP was able to lease another IP from a DHCP server.

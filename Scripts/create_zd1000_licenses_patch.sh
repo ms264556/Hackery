@@ -37,7 +37,7 @@ PURPOSE=upgrade
 VERSION=9.99.99.99
 BUILD=999
 REQUIRE_SIZE=1000
-REQUIRE_VERSIONS=8.2.0.0 8.4.0.0 9.1.0.0 9.1.0.3 9.1.1.0 9.1.2.0 9.2.0.0 9.3.0.0 9.3.1.0 9.3.2.0 9.3.4.0 9.4.0.0 9.4.2.0 9.4.3.0 9.5.1.0 9.5.2.0 9.5.3.0 9.6.0.0 9.6.1.0 9.6.2.0 9.7.0.0 9.7.1.0 9.7.2.0 9.8.0.0 9.8.1.0 9.8.2.0 9.8.3.0 9.9.0.0 9.9.1.0 9.10.0.0 9.10.1.0 9.10.2.0
+REQUIRE_VERSIONS=2.0.0.0 2.0.1.0 2.0.1.1 3.0.0.0 3.0.1.0 3.0.2.0 3.0.3.0 3.0.4.0 3.0.5.0 6.0.0.0 6.0.0.1 6.0.0.2 6.0.1.0 6.0.1.1 6.0.2.0 6.0.2.1 6.0.3.0 6.0.3.1 6.0.4.0 7.0.0.0 7.0.1.0 7.0.2.0 7.1.0.0 7.3.0.0 8.0.0.0 8.0.0.1 8.0.1.0 8.0.2.0 8.1.1.0 8.2.0.0 8.2.2.0 8.4.0.0 9.0.0.0 9.1.0.0 9.1.0.3 9.1.1.0 9.1.2.0 9.2.0.0 9.3.0.0 9.3.1.0 9.3.2.0 9.3.4.0
 REQUIRE_PLATFORM=ar7100
 ABILITY=ZD5000 
 END
@@ -52,7 +52,7 @@ cat <<END >upgrade_check.sh
 mount -o remount,rw /
 
 cat <<EOF >/etc/airespider-images/license-list.xml
-<license-list name="50 AP Management" max-ap="50" max-client="1250" value="0x0000000f" />
+<license-list name="50 AP Management" max-ap="50" max-client="1250" value="0x0000000f">
 </license-list>
 EOF
 
@@ -66,7 +66,8 @@ echo "Added AP Licenses.\n<br />"
 END
 
 chmod +x upgrade_check.sh
+cp upgrade_check.sh ac_upg.sh
 rm -f zd.patch.tgz
-tar czf zd.patch.tgz metadata all_files upgrade_check.sh
+tar czf zd.patch.tgz metadata all_files upgrade_check.sh ac_upg.sh
 rks_encrypt zd.patch.tgz zd1000.licenses.patch.img
-rm all_files metadata upgrade_check.sh zd.patch.tgz
+rm all_files metadata upgrade_check.sh ac_upg.sh zd.patch.tgz

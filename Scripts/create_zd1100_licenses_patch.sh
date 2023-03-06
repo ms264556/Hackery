@@ -71,7 +71,7 @@ rm -f support.spt
 tar -czf support.spt support
 
 cat <<EOF >/etc/airespider-images/license-list.xml
-<license-list name="50 AP Management" max-ap="50" max-client="1250" value="0x0000000f" />
+<license-list name="50 AP Management" max-ap="50" max-client="1250" value="0x0000000f">
 </license-list>
 EOF
 
