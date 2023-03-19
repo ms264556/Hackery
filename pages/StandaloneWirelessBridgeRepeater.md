@@ -3,7 +3,7 @@
 You can use the procedure below to bridge your AP to an existing WiFi network.
 
 > NOTE: This procedure has stopped working for the latest (110.0+) firmware releases.  
-  Make sure you have a 9.6, 9.7, 9.9 or 100.0 or 104.0 firmware installed before following these steps.
+  Make sure you have a 9.6, 9.7, 9.8, 9.9 or 100.0 or 104.0 firmware installed before following these steps.
 
 This may be useful if you have wired-only devices (e.g. printers or SIP phones) but can't easily run an ethernet drop.  
 Or maybe your router's WiFi signal is weak & it has no user-accessible ethernet ports (e.g. an LTE travel router or a phone hotspot).  
