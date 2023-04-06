@@ -60,6 +60,10 @@ This will reboot the target ZoneDirector/Unleashed, but the Acme service runs at
 
 * Use `Diagnostics` / `Edit File` to create a new file `/usr/local/bin/export_zd_cert.sh`, containing the above script.
 
+### Make the Script Executable
+
+* Use `Diagnostics` / `Command Prompt` to execute `chmod +x /usr/local/bin/export_zd_cert.sh`.
+
 ### Ask the Acme Service to run the script after renewing your certificate
 
 * In `Services` / `Acme Certificates` / `General settings`, make sure the `Write Certificates` box is ticked.
