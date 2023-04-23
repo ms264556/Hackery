@@ -72,13 +72,15 @@ sed 's/<support-list/<support-list status="1"/' support >/writable/etc/airespide
 rm -f support.spt
 tar -czf support.spt support
 
-cat <<EOF >/etc/airespider-images/license-list.xml
-<license-list name="450 AP Management" max-ap="450" max-client="8000" value="0x0000000f" urlfiltering-ap-license="450" is_url="1" is-clean="true">
-    <license id="1" name="400 AP Management" inc-ap="400" generated-by="264556" serial-number="\`cat /bin/SERIAL\`" status="0" detail="" />
-    <license id="2" name="URL Filtering License" feature-id="38" ap-num="450" generated-by="264556" serial-number="\`cat /bin/SERIAL\`" end-time="1835369940" start-time="`date +%s`" status="0" detail="" />
+cat <<EOF >/tmp/airespider-license-list-new.xml
+<license-list name="500 AP Management" max-ap="500" max-client="8000" value="0x0000000f" urlfiltering-ap-license="500" is_url="1" is-clean="true">
+    <license id="1" name="450 AP Management" inc-ap="450" generated-by="264556" serial-number="\`cat /bin/SERIAL\`" status="0" detail="" />
+    <license id="2" name="URL Filtering License" feature-id="38" ap-num="500" generated-by="264556" serial-number="\`cat /bin/SERIAL\`" end-time="1835369940" start-time="`date +%s`" status="0" detail="" />
 </license-list>
 EOF
-cat /etc/airespider-images/license-list.xml > /etc/airespider/license-list.xml
+cat /tmp/airespider-license-list-new.xml > /etc/airespider-images/license-list.xml
+cat /tmp/airespider-license-list-new.xml > /etc/airespider/license-list.xml
+cat /tmp/airespider-license-list-new.xml > /etc/airespider/license-list.bak.xml
 
 sed -i -e '/verify-upload-support)/a \\
         cd \/tmp\\
