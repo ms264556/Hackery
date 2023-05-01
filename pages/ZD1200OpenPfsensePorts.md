@@ -2,10 +2,11 @@
 
 ZoneDirector 10.5.1 enables secure AP provisioning, so it is feasible to connect APs to the ZoneDirector 1200 over the internet.
 
+Your ZoneDirector and your APs can be behind NAT routers, but the ZoneDirector's NAT router requires a static IP address.
 You need to NAT incoming UDP 12222,12223 & TCP 443,11443 traffic to your ZoneDirector.
 
 The complication is that the ZoneDirector Management Interface will also be sitting on port 443, and you might already have an existing website already being served on port 443.  
-We address this by installing HAProxy (if you haven't already), and only passing traffic to the specific URL which ZoneDirector requires.
+We can address this by installing HAProxy on pfSense (if you haven't already), and only passing traffic if it matches the specific URL which ZoneDirector AP provisioning requires.
 
 ## pfSense configuration steps
 
@@ -107,3 +108,13 @@ We address this by installing HAProxy (if you haven't already), and only passing
 > _If you can apply a Source rule (e.g. an ISP's IP range) then do so_  
 * ```Save```
 ```Apply Changes```
+
+## AP configuration steps
+
+* Install the latest Solo software image on your AP
+* SSH into the AP's CLI and configure the ZoneDirector's static external IP address:-
+	```
+	set director ip <external IP>
+	reboot
+	```
+
