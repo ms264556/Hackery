@@ -14,7 +14,7 @@ Just hacks and code snippets which might be useful to someone else.
 
 [Fix insecure Unleashed/ZoneDirector SSH Host Key](pages/MakeRuckusSshUseEcdsa.md)
 
-[Turn your Ruckus AP into a Wireless Bridge or Extender](pages/StandaloneWirelessBridgeRepeater.md)
+[Connect APs to ZoneDirector or Unleashed Dedicated Master over the Internet](pages/ZD1200OpenPfsensePorts.md)
 
 ## Font Hackery
 
