@@ -1,8 +1,14 @@
-# Open pfSense ports for AP to ZoneDirector communication
+# Configure pfSense for AP to ZoneDirector / Unleashed Dedicated Master communication
 
-ZoneDirector 10.5.1 enables secure AP provisioning, so it is feasible to connect APs to the ZoneDirector 1200 over the internet.
+You can use ZoneDirector or Unleashed Dedicated Master to manage APs at remote locations, and tunnel selected traffic back to a central location.
 
-Your ZoneDirector and your APs can be behind NAT routers, but the ZoneDirector's NAT router requires a static IP address.  
+Your ZoneDirector or Dedicated Master can be behind a NAT router, but this router requires a static IP address.   
+Your APs can be behind NAT or double-NAT (e.g. if your ISP uses CGNAT).
+
+# ZoneDirector
+
+You should enable Secure AP Provisioning (which is the default for ZoneDirector 10.5.1).
+
 You need to NAT incoming UDP 12222,12223 & TCP 443,11443 WAN traffic to your ZoneDirector.  
 And you need to configure your APs with the public IP address of your ZoneDirector.
 
@@ -111,7 +117,46 @@ We can address these problems by installing HAProxy on pfSense (if you haven't a
 * ```Save```
 ```Apply Changes```
 
-## AP configuration steps
+# Unleashed Dedicated Master
+
+You need to NAT incoming UDP 12222,12223 & TCP 60000 WAN traffic to your Unleashed Dedicated Master.  
+And you need to configure your APs with the public IP address of your Unleashed Dedicated Master.
+
+## pfSense configuration steps
+
+### Add Port Aliases
+
+```Firewall``` > ```Aliases``` > ```Ports``` > ```Add```
+* Properties > Name: ```ZoneDirectorUdp```
+* Port(s) > Port: ```12222:12223```
+* ```Save```
+ 
+```Firewall``` > ```Aliases``` > ```Ports``` > ```Add```
+* Properties > Name: ```ZoneDirectorTcp```
+* Port(s) > Port: ```60000```
+* ```Save```
+```Apply Changes```
+
+### Add NAT Port Forwards
+
+```Firewall``` > ```NAT``` > ```Port Forward``` > ```Add``` _(the down arrow)_
+* Edit Redirect Entry > Protocol: ```UDP```
+* Edit Redirect Entry > Destination port range > Custom: ```ZoneDirectorUdp```  
+> _If you can apply a Source rule (e.g. an ISP's IP range) then do so_  
+* Edit Redirect Entry > Redirect target IP > Address: ```<Unleashed Dedicated Master IP>```
+* Edit Redirect Entry > Redirect target port > Custom: ```ZoneDirectorUdp```
+* ```Save```
+
+```Firewall``` > ```NAT``` > ```Port Forward``` > ```Add``` _(the down arrow)_
+* Edit Redirect Entry > Destination port range > Custom: ```ZoneDirectorTcp```
+> _If you can apply a Source rule (e.g. an ISP's IP range) then do so_  
+* Edit Redirect Entry > Redirect target IP > Address: ```<Unleashed Dedicated Master IP>```
+* Edit Redirect Entry > Redirect target port > Custom: ```ZoneDirectorTcp```
+* ```Save```
+```Apply Changes```
+
+
+# AP configuration steps
 
 * Install the latest Solo software image on your AP
 * SSH into the AP's CLI and configure the ZoneDirector's static external IP address:-
