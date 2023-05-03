@@ -1,6 +1,6 @@
 # Configure pfSense for AP to ZoneDirector / Unleashed Dedicated Master communication
 
-You can use ZoneDirector or Unleashed Dedicated Master to manage APs at remote locations, and tunnel selected traffic back to a central location.
+You can use ZoneDirector or Unleashed Dedicated Master to manage APs at remote internet-connected locations, and tunnel selected traffic back to a central location.
 
 Your ZoneDirector or Dedicated Master can be behind a NAT router, but this router requires a static IP address.   
 Your APs can be behind NAT or double-NAT (e.g. if your ISP uses CGNAT).
