@@ -41,61 +41,12 @@ reboot
 
 Job done.
 
-## Option 3: Manually removing the country lock (for pre-2020 AP models, including non-Unleashed APs)
+## Option 3: Permanently removing the country lock from a Solo or Standalone AP
 
 ### 1) Obtain a root shell
 
-The unlocking procedure requires you to *temporarily* install an older software version.  
-Ensure the installed access point software was released in November 2019 or earlier. Otherwise, download an older version from [https://support.ruckuswireless.com/software](https://support.ruckuswireless.com/software) and do an 'upgrade'.  
-
-SSH into the AP *using the same credentials you use to log into the web dashboard*, then break out to a root shell. There is a different procedure depending on whether or not your AP is running Unleashed software:
-
-* [Unleashed Access Points](https://alephsecurity.com/vulns/aleph-2019004#proof-of-concept)
-
-```console
-ruckus> enable 
-ruckus# debug 
-You have all rights in this mode.
-ruckus(debug)# script 
-ruckus(script)# exec ../../../bin/sh
-
-
-Ruckus Wireless ZoneDirector -- Command Line Interface
-Enter 'help' for a list of built-in commands.
-
-ruckus$ stty echo
-ruckus$
-```
-
-> You won't be able to see yourself typing `stty echo`. Calling `stty echo` restores local echo so you can see what you're typing.
-
-* [Other Access Points](https://alephsecurity.com/vulns/aleph-2019014#proof-of-concept)
-
-```console
-rkscli: Ruckus
-```
-
-Now type `";/bin/sh;"` and hit enter *(you won't be able to see what you're typing)*
-
-```console
-grrrr
-```
-
-> Instead of `grrrr`, any other random dog noise could  be printed to the screen. 
-
-```console
-rkscli: !v54!
-What's your chow: 
-```
-
-Now hit enter twice
-
-```console
-BusyBox v1.15.2 (2015-07-21 22:07:19 PDT) built-in shell (ash)
-Enter 'help' for a list of built-in commands.
-
-#
-```
+Follow [these instructions](StandaloneApRootShell.md) to obtain a root shell.  
+The unlocking procedure may require you to *temporarily* install an older firmware version on your AP.  
 
 ### 2) Remove the Country Lock
 
