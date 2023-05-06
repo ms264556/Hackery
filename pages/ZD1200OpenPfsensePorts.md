@@ -1,4 +1,4 @@
-# Configure pfSense for AP to ZoneDirector / Unleashed Dedicated Master communication
+# Connect APs to ZoneDirector / Unleashed over the public Internet
 
 You can use ZoneDirector or Unleashed Dedicated Master to manage APs at remote internet-connected locations, and tunnel selected traffic back to your network.
 
