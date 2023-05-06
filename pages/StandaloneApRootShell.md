@@ -8,9 +8,15 @@ The encrypted serial# is saved to a file using the `Ruckus` command, then the `!
 
 ## Firmware >112.1
 
-Sorry, I don't have a method to bypass the serial# check on newer Standalone/Solo AP firmwares
+Sorry, I don't have a method to bypass the serial# check on newer Standalone/Solo AP firmwares.  
 
-## Firmware 9.8 - 112.1
+If your AP was released before mid-2019 then you can downgrade to an older Solo firmware. If there are no older Solo firmwares, but your AP model was supported in ZoneDirector before this date (e.g. R730) then you can download the ZoneDirector release, [decrypt the image](ZDecryptRuckusBackups.md), extract the relevant ZoneDirector AP image (e.g. using 7-Zip) and temporarily install this.
+
+For the R730, the [ZoneDirector 10.1.2.0.120](https://support.ruckuswireless.com/software/1970-zd1200-10-1-2-0-210-mr2-refresh1-software-release) firmware contains a suitable AP image at ```firmwares/ap-patch/patch000/ap-arm-11ax/10.1.2.0.120/rcks_fw.bl7.main```.
+
+Alternatively, if your AP has Unleashed firmware available then you can install and use this to [obtain a root shell](UnleashedAddRootShell.md).
+
+## Firmware 9.8 - 112.0 (excl. 110.0.0.0.2005)
 
 These AP firmware versions [don't sanitize the encrypted serial#](https://alephsecurity.com/vulns/aleph-2019014#proof-of-concept).  
 So we can use the `Ruckus` command to inject a root shell.
