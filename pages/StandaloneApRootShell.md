@@ -6,7 +6,7 @@ The Ruckus CLI includes a hidden `!v54!` command which exits to a root shell.
 * Newer AP firmware checks an encrypted serial# to decide whether the `!v54!` command is available.  
 The encrypted serial# is saved to a file using the `Ruckus` command, then the `!v54!` command uses `sesame` to decrypt this file.
 
-## Firmware >112.1
+## Firmware >112.0
 
 Sorry, I don't have a method to bypass the serial# check on newer Standalone/Solo AP firmwares.  
 
