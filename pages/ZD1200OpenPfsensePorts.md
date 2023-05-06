@@ -5,6 +5,8 @@ You can use ZoneDirector or Unleashed Dedicated Master to manage APs at remote i
 Your ZoneDirector or Dedicated Master can be behind a NAT router, but this router requires a static IP address.   
 Your APs can be behind NAT or double-NAT (e.g. if your ISP uses CGNAT).
 
+This guide configures NAT routing on pfSense. You will need to adapt the steps to suit other firewalls.
+
 # ZoneDirector
 
 You should enable Secure AP Provisioning (which is the default for ZoneDirector 10.5.1).
