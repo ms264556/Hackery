@@ -70,6 +70,9 @@ EOF
 chmod +x /usr/local/bin/switch-monitor-to-displayport.sh
 ```
 
+> ```60``` is the ddc inputsource, and ```0x0f``` is my monitor's inputsource code for DisplayPort1.  
+> If you don't know your monitor's inputsource codes the you can [look them up here](https://github.com/ddccontrol/ddccontrol-db/tree/master/db/monitor).
+
 ### 4) Setup the Global Hotkey
 Varies depending on Linux distro.
 
