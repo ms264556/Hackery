@@ -2,7 +2,7 @@
 
 You can use ZoneDirector or Unleashed Dedicated Master to manage APs at remote internet-connected locations, and tunnel selected traffic back to your network.
 
-Your ZoneDirector or Dedicated Master can be behind a NAT router, but this router requires a static IP address.   
+Your ZoneDirector or Dedicated Master can be behind a NAT router, but this router requires a static WAN IP address.   
 Your APs can be behind NAT or double-NAT (e.g. if your ISP uses CGNAT).
 
 This guide configures NAT routing on pfSense. You will need to adapt the steps to suit other firewalls.
