@@ -14,7 +14,7 @@ You should enable Secure AP Provisioning (which is the default for ZoneDirector 
 You need to NAT incoming UDP 12222,12223 & TCP 443,11443 WAN traffic to your ZoneDirector.  
 And you need to configure your APs with the public IP address of your ZoneDirector.
 
-The complication is that the ZoneDirector Management Interface also uses port 443, and we don't want to expose this to the internet.  
+A complication is that the ZoneDirector Management Interface also uses port 443, and we don't want to expose this to the internet.  
 And you might already be serving an unrelated website on port 443.  
 We can address these problems by installing HAProxy on pfSense (if you haven't already), and only passing HTTPS traffic if it matches the specific URL which ZoneDirector AP provisioning requires.
 
@@ -31,6 +31,7 @@ We can address these problems by installing HAProxy on pfSense (if you haven't a
 * Properties > Name: ```ZoneDirectorTcp```
 * Port(s) > Port: ```11443```
 * ```Save```
+
 ```Apply Changes```
 
 ### Add NAT Port Forwards
@@ -49,6 +50,7 @@ We can address these problems by installing HAProxy on pfSense (if you haven't a
 * Edit Redirect Entry > Redirect target IP > Address: ```<ZoneDirector IP>```
 * Edit Redirect Entry > Redirect target port > Custom: ```ZoneDirectorTcp```
 * ```Save```
+
 ```Apply Changes```
 
 ### Add CA and Certificate for HAProxy Frontend
@@ -78,6 +80,7 @@ We can address these problems by installing HAProxy on pfSense (if you haven't a
 	* Encrypt: ```tick```
 * Health checking > Health check method > ```none```
 * ```Save```
+
 ```Apply Changes```
 
 ### Create HAProxy Frontend
@@ -100,6 +103,7 @@ We can address these problems by installing HAProxy on pfSense (if you haven't a
 * SSL Offloading > Certificate > ```<external IP> (CA: internal-ca) [Server cer]```
 * SSL Offloading > Certificate > Add ACL for certificate CommonName. (host header matches the "CN" of the certificate): ```tick```
 * ```Save```
+
 ```Apply Changes```
 
 ### Enable HAProxy
@@ -108,6 +112,7 @@ We can address these problems by installing HAProxy on pfSense (if you haven't a
 * General settings > Enable HAProxy: ```tick```
 * General settings > Maximum connections: ```5``` _(any number here, the # of APs is a safe bet)_
 * ```Save```
+
 ```Apply Changes``` _(ignore the warnings)_
 
 ### Add Firewall Rule so HAProxy receives traffic
@@ -117,6 +122,7 @@ We can address these problems by installing HAProxy on pfSense (if you haven't a
 * Destination > Destination Port Range > From: ```HTTPS (443)```
 > _If you can apply a Source rule (e.g. an ISP's IP range) then do so_  
 * ```Save```
+
 ```Apply Changes```
 
 # Unleashed Dedicated Master
@@ -137,6 +143,7 @@ And you need to configure your APs with the public IP address of your Unleashed 
 * Properties > Name: ```ZoneDirectorTcp```
 * Port(s) > Port: ```60000```
 * ```Save```
+
 ```Apply Changes```
 
 ### Add NAT Port Forwards
@@ -155,6 +162,9 @@ And you need to configure your APs with the public IP address of your Unleashed 
 * Edit Redirect Entry > Redirect target IP > Address: ```<Unleashed Dedicated Master IP>```
 * Edit Redirect Entry > Redirect target port > Custom: ```ZoneDirectorTcp```
 * ```Save```
+
+
+
 ```Apply Changes```
 
 
