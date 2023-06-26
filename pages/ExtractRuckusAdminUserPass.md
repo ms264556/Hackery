@@ -1,4 +1,4 @@
-# Extract your Ruckus Unleashed/ZoneDirector password from a Backup
+# Extract Ruckus Unleashed / ZoneDirector passwords from Backups
 
 Use this script if you've forgotten the login details for your Ruckus Unleashed/ZoneDirector, but you have access to a backup.
 

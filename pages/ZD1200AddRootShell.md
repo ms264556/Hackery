@@ -1,4 +1,4 @@
-# Accessing a Root Shell on Ruckus ZoneDirectors
+# Add a Root Shell to Ruckus ZoneDirector
 
 ## ZoneDirector 10.4 - 10.5.1
 

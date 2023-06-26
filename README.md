@@ -6,15 +6,15 @@ Just hacks and code snippets which might be useful to someone else.
 
 [Change the Country Code on country-locked Ruckus Access Points](pages/RuckusCountryCodeChange.md)
 
-[Push Let's Encrypt certificates to your Ruckus Unleashed or ZoneDirector](pages/PfSenseLetsEncryptToRuckus.md)
+[Push Let's Encrypt certificates to Ruckus Unleashed/ZoneDirector](pages/PfSenseLetsEncryptToRuckus.md)
 
-[Retrieve forgotten passwords from your Unleashed or ZoneDirector backup](pages/ExtractRuckusAdminUserPass.md)
+[Retrieve forgotten passwords from Unleashed/ZoneDirector backups](pages/ExtractRuckusAdminUserPass.md)
 
-[Enable Upgrades and Add Extra AP Licenses to your ZoneDirector for HomeLab Use](pages/ZD1200LicensesAndSupport.md)
+[Enable Upgrades and Add Extra AP Licenses to ZoneDirector for HomeLab Use](pages/ZD1200LicensesAndSupport.md)
 
 [Fix insecure Unleashed/ZoneDirector SSH Host Key](pages/MakeRuckusSshUseEcdsa.md)
 
-[Connect APs to ZoneDirector or Unleashed Dedicated Master over the Internet](pages/ZD1200OpenPfsensePorts.md)
+[Connect APs to ZoneDirector / Unleashed Dedicated Master over the Internet](pages/ZD1200OpenPfsensePorts.md)
 
 ## Font Hackery
 

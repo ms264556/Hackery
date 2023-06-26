@@ -1,4 +1,4 @@
-# Add Licenses and Upgrade Entitlement to a ZoneDirector
+# Add Licenses and Upgrade Entitlement to ZoneDirector
 
 To prevent e-waste and save these from landfills, you may use the procedure here to enable upgrades, enable URL filtering and apply the maximum number of AP licenses to your ZoneDirector for use in a homelab or personal environment.
 

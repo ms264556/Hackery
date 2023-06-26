@@ -1,4 +1,4 @@
-# Push TLS Certificates to Ruckus ZoneDirector or Unleashed
+# Push TLS Certificates to Ruckus ZoneDirector / Unleashed
 
 There's no official API for pushing certificates to Ruckus ZoneDirector or Ruckus Unleashed.  
 This is a pain. Free TLS certificates issued by [Let's Encrypt](https://letsencrypt.org) are only good for 90 days, so automation is key.

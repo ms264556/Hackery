@@ -1,4 +1,4 @@
-# Add a Single Use Root Shell to your ZoneDirector 1200
+# Add a Single Use Root Shell to ZoneDirector 1200
 
 Until late 2019 you could escape from the Ruckus CLI to a root shell.  
 You can temporarily add this functionality, without making any persistent changes to your ZD1200.  

@@ -1,4 +1,4 @@
-## Create a pre-patched Software Installation Image (from Linux or WSL)
+## Create a pre-patched ZoneDirector Software Installation Image (from Linux or WSL)
 
 The script below patches a ZD1200 Software Image so that it includes a root shell, 75 AP licenses and an Upgrade entitlement ending in 2027.  
 If you already have the latest software version or you have no active support then just download, patch & apply the version you're currently running.
