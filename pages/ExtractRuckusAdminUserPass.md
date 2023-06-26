@@ -7,7 +7,7 @@ Use this script if you've forgotten the login details for your Ruckus Unleashed/
 
 ## Bash script (using Python)
 
-Paste this script into a shell, to create the extraction function:-
+Paste this script into a bash shell, to create the extraction function:-
 ```bash
 function ruckus_getadmin {
 RUCKUS_BAK="$1" python3 - <<END
@@ -51,3 +51,21 @@ user = ms264556
 pass = MyPassw0rd
 $
 ```
+
+## Python aioruckus
+
+The Python [aioruckus package](https://pypi.org/project/aioruckus/) can also be used to extract Ruckus Unleashed/ZoneDirector passwords from backups.
+
+Sample Python code to do this:-
+```python
+from aioruckus import BackupSession, SystemStat
+import asyncio
+
+async def print_admin_user():
+    with BackupSession.create("<path to your ZoneDirector/Unleashed .bak file>") as session:
+        admin = (await session.api.get_system_info(SystemStat.ALL))["admin"]
+        print(f"{admin['username']}: {admin['password']}")
+asyncio.run(print_admin_user())
+```
+
+
