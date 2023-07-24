@@ -8,12 +8,6 @@ Just hacks and code snippets which might be useful to someone else.
 
 [Push Let's Encrypt certificates to Ruckus Unleashed/ZoneDirector](pages/PfSenseLetsEncryptToRuckus.md)
 
-[Retrieve forgotten passwords from Unleashed/ZoneDirector backups](pages/ExtractRuckusAdminUserPass.md)
-
-[Enable Upgrades and Add Extra AP Licenses to ZoneDirector for HomeLab Use](pages/ZD1200LicensesAndSupport.md)
-
-[Fix insecure Unleashed/ZoneDirector SSH Host Key](pages/MakeRuckusSshUseEcdsa.md)
-
 [Connect APs to ZoneDirector / Unleashed Dedicated Master over the Internet](pages/ZD1200OpenPfsensePorts.md)
 
 ## Font Hackery
