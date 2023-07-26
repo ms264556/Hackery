@@ -4,7 +4,7 @@ Just hacks and code snippets which might be useful to someone else.
 
 ## Ruckus Wireless Hackery
 
-[Change the Country Code on country-locked Ruckus Access Points](pages/RuckusCountryCodeChange.md)
+[Change the Country Code on country-locked Ruckus Access Points](https://ms264556.net/pages/RuckusCountryCodeChange)
 
 [Push Let's Encrypt certificates to Ruckus Unleashed/ZoneDirector](pages/PfSenseLetsEncryptToRuckus.md)
 
