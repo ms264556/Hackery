@@ -6,9 +6,9 @@ Just hacks and code snippets which might be useful to someone else.
 
 [Change the Country Code on country-locked Ruckus Access Points](https://ms264556.net/pages/RuckusCountryCodeChange)
 
-[Push Let's Encrypt certificates to Ruckus Unleashed/ZoneDirector](pages/PfSenseLetsEncryptToRuckus.md)
+[Push Let's Encrypt certificates to Ruckus Unleashed/ZoneDirector](https://ms264556.net/pages/PfSenseLetsEncryptToRuckus)
 
-[Connect APs to ZoneDirector / Unleashed Dedicated Master over the Internet](pages/ZD1200OpenPfsensePorts.md)
+[Connect APs to ZoneDirector / Unleashed Dedicated Master over the Internet](https://ms264556.net/pages/ZD1200OpenPfsensePorts)
 
 ## Font Hackery
 
