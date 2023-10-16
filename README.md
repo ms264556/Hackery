@@ -2,13 +2,19 @@
 
 Just hacks and code snippets which might be useful to someone else.
 
+## Ruckus Wireless Guides
+
+[Push Let's Encrypt certificates to Ruckus Unleashed/ZoneDirector](https://ms264556.net/pages/PfSenseLetsEncryptToRuckus)
+
+[Connect APs to ZoneDirector over the Internet](https://ms264556.net/pages/ZD1200OpenPfsensePorts)
+
 ## Ruckus Wireless Hackery
 
 [Change the Country Code on country-locked Ruckus Access Points](https://ms264556.net/pages/RuckusCountryCodeChange)
 
-[Push Let's Encrypt certificates to Ruckus Unleashed/ZoneDirector](https://ms264556.net/pages/PfSenseLetsEncryptToRuckus)
+[Recovering after a ZoneDirector failure](https://ms264556.net/pages/MigrateDeadZoneDirector)
 
-[Connect APs to ZoneDirector / Unleashed Dedicated Master over the Internet](https://ms264556.net/pages/ZD1200OpenPfsensePorts)
+[Other Ruckus Wireless Hackery](https://ms264556.net)
 
 ## Font Hackery
 
@@ -16,7 +22,7 @@ Just hacks and code snippets which might be useful to someone else.
 
 [A HiDPI-friendly Verdana font alternative for Programming (150%+ text scaling version)](pages/VerdanaRetinaVisualStudio.md)
 
-## Dell Monitor KVM Hackery
+## Dell Monitor KVM Guides
 
 [Sharing a Bluetooth Keyboard between Linux and Windows](pages/BluetoothKeyboardViaKVM.md)
 
