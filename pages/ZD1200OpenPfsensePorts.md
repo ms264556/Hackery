@@ -1,3 +1,3 @@
 # Connect APs to ZoneDirector over the public Internet
 
-This content has [moved](https://ms264556.net/pages/ZD1200OpenPfsensePorts).
+This content has [moved](https://ms264556.net/ruckus/ZD1200OpenPfsensePorts).

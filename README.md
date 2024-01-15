@@ -1,31 +1,29 @@
-# Hackery
+# [Hackery](https://ms264556.net)
 
-Just hacks and code snippets which might be useful to someone else.
+The hacks and guides have moved to [ms264556.net](https://ms264556.net).
 
-## Ruckus Wireless Guides
+The github repo is only being used for website comments, issues and notes.
 
-[Push Let's Encrypt certificates to Ruckus Unleashed/ZoneDirector](https://ms264556.net/pages/PfSenseLetsEncryptToRuckus)
+## [Ruckus Wireless Guides](https://ms264556.net/ruckus/#guides)
 
-[Connect APs to ZoneDirector over the Internet](https://ms264556.net/pages/ZD1200OpenPfsensePorts)
+Configuring certificates and firewalls for Ruckus Unleashed and ZoneDirector
 
-## Ruckus Wireless Hackery
+## [Ruckus Wireless Hackery](https://ms264556.net/ruckus/#hackery)
 
-[Change the Country Code on country-locked Ruckus Access Points](https://ms264556.net/pages/RuckusCountryCodeChange)
+Extend the functionality or lifespan of your Ruckus AP or ZoneDirectors
 
-[Recovering after a ZoneDirector failure](https://ms264556.net/pages/MigrateDeadZoneDirector)
+## [Font Hackery](https://ms264556.net/font/)
 
-[Other Ruckus Wireless Hackery](https://ms264556.net)
+Improve the usability of Verdana as a programming font
 
-## Font Hackery
+## [Dell Monitor Guides](https://ms264556.net/dell/)
 
-[A tweaked Verdana font for Programming (100% or 125% text scaling version)](pages/VerdanaVisualStudio.md)
+Configuring Dell Monitor KVM and PbP/PiP functionality
 
-[A HiDPI-friendly Verdana font alternative for Programming (150%+ text scaling version)](pages/VerdanaRetinaVisualStudio.md)
+# Notes
 
-## Dell Monitor KVM Guides
+The following tools, plugins and libraries are used (thanks!):-
 
-[Sharing a Bluetooth Keyboard between Linux and Windows](pages/BluetoothKeyboardViaKVM.md)
-
-[Setting up a hotkey to switch between Linux and Windows](pages/InputSwitchHotkey.md)
-
-[Setting up a hotkey to switch Picture-by-Picture On/Off](pages/DellPbPSwitch.md)
+* [VitePress](https://vitepress.dev/)
+* [vitepress-plugin-comment-with-giscus](https://github.com/T-miracle/vitepress-plugin-comment-with-giscus)
+* [@gera2ld/tarjs](https://github.com/gera2ld/tarjs)
