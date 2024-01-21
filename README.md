@@ -27,3 +27,5 @@ The following tools, plugins and libraries are used (thanks!):-
 * [VitePress](https://vitepress.dev/)
 * [vitepress-plugin-comment-with-giscus](https://github.com/T-miracle/vitepress-plugin-comment-with-giscus)
 * [@gera2ld/tarjs](https://github.com/gera2ld/tarjs)
+* [aes-js](https://github.com/ricmoo/aes-js)
+* [node-forge](https://github.com/digitalbazaar/forge)
