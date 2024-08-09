@@ -8,6 +8,8 @@ The github repo is only being used for website comments, issues and notes.
 
 Configuring certificates and firewalls for Ruckus Unleashed and ZoneDirector
 
+An AP Firmware Selection Tool
+
 ## [Ruckus Wireless Hackery](https://ms264556.net/ruckus/#hackery)
 
 Extend the functionality or lifespan of your Ruckus AP or ZoneDirectors
@@ -25,6 +27,7 @@ Configuring Dell Monitor KVM and PbP/PiP functionality
 The following tools, plugins and libraries are used (thanks!):-
 
 * [VitePress](https://vitepress.dev/)
-* [vitepress-plugin-comment-with-giscus](https://github.com/T-miracle/vitepress-plugin-comment-with-giscus)
+* [giscus](https://giscus.app/) via [vitepress-plugin-comment-with-giscus](https://github.com/T-miracle/vitepress-plugin-comment-with-giscus)
 * [@gera2ld/tarjs](https://github.com/gera2ld/tarjs)
 * [aes-js](https://github.com/ricmoo/aes-js)
+* [vue-multiselect](https://github.com/shentao/vue-multiselect)
