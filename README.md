@@ -28,6 +28,6 @@ The following tools, plugins and libraries are used (thanks!):-
 
 * [VitePress](https://vitepress.dev/)
 * [giscus](https://giscus.app/) via [vitepress-plugin-comment-with-giscus](https://github.com/T-miracle/vitepress-plugin-comment-with-giscus)
-* [aes-js](https://github.com/ricmoo/aes-js)
+* [noble-ciphers](https://github.com/paulmillr/noble-ciphers)
 * [vue-multiselect](https://github.com/shentao/vue-multiselect)
 * [feed](https://github.com/jpmonette/feed)
